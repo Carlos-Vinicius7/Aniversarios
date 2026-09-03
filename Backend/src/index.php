@@ -3,14 +3,14 @@ require_once __DIR__ . '/../autoload.php';
 
 use App\Repository\PessoaRepositoryMemoria;
 use App\Repository\AvisoRepositoryMemoria;
-use App\Services\PessoaService;
-use App\Services\PreferenciaService;
-use App\Services\AniversarioService;
-use App\Services\AvisoService;
-use App\Controllers\PessoaController;
-use App\Controllers\PreferenciaController;
-use App\Controllers\AniversarioController;
-use App\Controllers\AvisoController;
+use App\Service\PessoaService;
+use App\Service\PreferenciaService;
+use App\Service\AniversarioService;
+use App\Service\AvisoService;
+use App\Controller\PessoaController;
+use App\Controller\PreferenciaController;
+use App\Controller\AniversarioController;
+use App\Controller\AvisoController;
 
 $pessoaRepo = new PessoaRepositoryMemoria();
 $avisoRepo = new AvisoRepositoryMemoria();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Service;
 
 use App\Models\Aviso;
 use App\Repository\AvisoRepositoryMemoria;

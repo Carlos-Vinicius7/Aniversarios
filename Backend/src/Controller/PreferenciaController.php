@@ -1,7 +1,7 @@
 <?php
-namespace App\Controllers;
+namespace App\Controller;
 
-use App\Services\PreferenciaService;
+use App\Service\PreferenciaService;
 
 class PreferenciaController
 {

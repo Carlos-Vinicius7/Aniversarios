@@ -1,7 +1,7 @@
 <?php
-namespace App\Controllers;
+namespace App\Controller;
 
-use App\Services\PessoaService;
+use App\Service\PessoaService;
 
 class PessoaController
 {

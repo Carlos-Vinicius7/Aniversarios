@@ -1,8 +1,8 @@
 <?php
 // src/Controllers/AvisoController.php
-namespace App\Controllers;
+namespace App\Controller;
 
-use App\Services\AvisoService;
+use App\Service\AvisoService;
 
 class AvisoController
 {

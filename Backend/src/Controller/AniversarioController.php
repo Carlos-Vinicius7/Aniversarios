@@ -1,8 +1,8 @@
 <?php
 // src/Controllers/AniversarioController.php
-namespace App\Controllers;
+namespace App\Controller;
 
-use App\Services\AniversarioService;
+use App\Service\AniversarioService;
 
 class AniversarioController
 {
