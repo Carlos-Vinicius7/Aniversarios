@@ -3,38 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Controle de Aniversários</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="./CSS/pages/Login/login.css">
+    <title>Gardenia - Login e Cadastro</title>
 </head>
 <body>
+    <div class="container">
+        <div class="brand-section">
+            <div class="logo">
+                <h1>Gardenia</h1>
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="form-card">
+                
+                <!-- Formulário de Cadastro (Visível por padrão) -->
+                <div id="cadastro-container">
+                    <h2>Criar uma conta</h2>
+                    <p class="subtitle">Já tem uma conta? <a href="#" id="link-to-login">Entrar</a></p>
 
-    <form class="formulario-login">
-        <h1>Login</h1>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email">
-        <br>
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha">
-        <br>
-        <button type="submit">Entrar</button>
-    </form>
+                    <form class="formulario-cadastro">
+                        <div class="input-group">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email-cadastro" name="email" placeholder="E-mail" required>
+                        </div>
 
-    <form class="formulario-cadastro">
-        <h1>Cadastro</h1>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome">
-        <br>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email">
-        <br>
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha">
-        <br>
-        <label for="confirmacao_senha">Confirmar Senha:</label>
-        <input type="password" id="confirmacao_senha" name="confirmacao_senha">
-        <br>
-        <button type="submit">Cadastrar</button>
-    </form>
+                        <div class="input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="senha-cadastro" name="senha" placeholder="Senha" required>
+                        </div>
 
+                        <div class="input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="confirmacao_senha" name="confirmacao_senha" placeholder="Confirmar senha" required>
+                        </div>
 
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="terms" required>
+                                <span>Eu concordo com os <strong>Termos de Serviço</strong> e a <strong>Política de Privacidade</strong></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-signup">Cadastrar</button>
+                    </form>
+                </div>
+
+                <!-- Formulário de Login (Oculto por padrão) -->
+                <div id="login-container" style="display: none;">
+                    <h2>Entrar</h2>
+                    <p class="subtitle">Não tem uma conta? <a href="#" id="link-to-cadastro">Criar conta</a></p>
+
+                    <form class="formulario-login">
+                        <div class="input-group">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="E-mail" required>
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="remember">
+                                Lembrar de mim
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-signup">Entrar</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script externo para alternar entre os formulários -->
+    <script src="./JavaScript/pages/Login/login.js"></script>
 </body>
 </html>
