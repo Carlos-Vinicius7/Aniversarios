@@ -3,15 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardenia - Sistema de Controle</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-    <title>Document</title>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Sidebar CSS -->
+    <link rel="stylesheet" href="../../CSS/pages/Sidebar/Sidebar.css">
 </head>
 <body>
-    
-    
 
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menu">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="app-wrapper">
+
+        <!-- ============================================
+             SIDEBAR
+             ============================================ -->
+        <nav id="sidebar">
+
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <a href="#" class="sidebar-logo">
+                    <i class="bi bi-leaf logo-icon"></i>
+                    <span class="logo-text">Gardenia</span>
+                </a>
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Recolher menu">
+                    <i class="bi bi-chevron-double-left"></i>
+                </button>
+            </div>
+
+            <!-- Sidebar Navigation -->
+            <div class="sidebar-nav">
+
+                <!-- Seção Principal -->
+                <div class="sidebar-section-label">Principal</div>
+
+                <a href="#" class="nav-link" data-fragment="../Fragments/Dashboard.html" data-tooltip="Dashboard">
+                    <i class="bi bi-grid-1x2"></i>
+                    <span class="link-text">Dashboard</span>
+                </a>
+
+                <a href="#" class="nav-link" data-fragment="../Fragments/Calendario.html" data-tooltip="Calendário">
+                    <i class="bi bi-calendar3"></i>
+                    <span class="link-text">Calendário</span>
+                </a>
+
+                <!-- Dropdown: Aniversários -->
+                <a href="#collapseAniversarios" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseAniversarios" data-tooltip="Aniversários">
+                    <i class="bi bi-gift"></i>
+                    <span class="link-text">Aniversários</span>
+                    <i class="bi bi-chevron-down dropdown-arrow"></i>
+                </a>
+                <div class="collapse" id="collapseAniversarios">
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="#" class="nav-link" data-fragment="../Fragments/Dashboard.html" data-tooltip="Próximos">
+                                <span class="link-text">Próximos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" data-fragment="../Fragments/Calendario.html" data-tooltip="Todos">
+                                <span class="link-text">Todos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Seção Pessoal -->
+                <div class="sidebar-section-label">Pessoal</div>
+
+                <a href="#" class="nav-link" data-fragment="../Fragments/Notas.html" data-tooltip="Notas">
+                    <i class="bi bi-journal-text"></i>
+                    <span class="link-text">Notas</span>
+                </a>
+
+                <a href="#" class="nav-link" data-fragment="../Fragments/Perfil.html" data-tooltip="Perfil">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="link-text">Perfil</span>
+                </a>
+
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+                <a href="../../index.html" class="nav-link" data-tooltip="Sair">
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span class="link-text">Sair</span>
+                </a>
+            </div>
+
+        </nav>
+
+        <!-- ============================================
+             MAIN CONTENT AREA
+             ============================================ -->
+        <main class="main-content">
+            <div id="content-area">
+                <!-- Os fragmentos serão injetados aqui via JavaScript -->
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+
+    <!-- Sidebar JS -->
+    <script src="../../JavaScript/pages/Sidebar/Sidebar.js"></script>
 </body>
 </html>

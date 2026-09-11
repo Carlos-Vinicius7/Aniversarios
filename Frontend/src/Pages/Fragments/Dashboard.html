@@ -1,0 +1,102 @@
+<!-- Fragment: Dashboard -->
+<div class="fragment-header">
+    <h1>Dashboard</h1>
+    <p>Visão geral do sistema de controle de aniversários</p>
+</div>
+
+<!-- Stat Cards -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-gift"></i></div>
+            <div class="stat-value">24</div>
+            <div class="stat-label">Aniversários cadastrados</div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-calendar-event"></i></div>
+            <div class="stat-value">3</div>
+            <div class="stat-label">Esta semana</div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-bell"></i></div>
+            <div class="stat-value">5</div>
+            <div class="stat-label">Lembretes ativos</div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-people"></i></div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Grupos</div>
+        </div>
+    </div>
+</div>
+
+<!-- Próximos Aniversários -->
+<div class="fragment-card">
+    <h5><i class="bi bi-cake2 me-2" style="color: #6db87e;"></i>Próximos Aniversários</h5>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th style="color: #1a2a22;">Nome</th>
+                    <th style="color: #1a2a22;">Data</th>
+                    <th style="color: #1a2a22;">Idade</th>
+                    <th style="color: #1a2a22;">Dias restantes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maria Silva</td>
+                    <td>15 de Setembro</td>
+                    <td>28 anos</td>
+                    <td><span class="badge" style="background-color: #4a7c59;">4 dias</span></td>
+                </tr>
+                <tr>
+                    <td>João Santos</td>
+                    <td>22 de Setembro</td>
+                    <td>35 anos</td>
+                    <td><span class="badge" style="background-color: #6db87e;">11 dias</span></td>
+                </tr>
+                <tr>
+                    <td>Ana Oliveira</td>
+                    <td>01 de Outubro</td>
+                    <td>42 anos</td>
+                    <td><span class="badge" style="background-color: #89c99b;">20 dias</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Atividade Recente -->
+<div class="fragment-card">
+    <h5><i class="bi bi-clock-history me-2" style="color: #6db87e;"></i>Atividade Recente</h5>
+    <ul class="list-unstyled mb-0">
+        <li class="d-flex align-items-center py-2 border-bottom" style="border-color: rgba(0,0,0,0.05) !important;">
+            <i class="bi bi-plus-circle me-3" style="color: #4a7c59; font-size: 1.1rem;"></i>
+            <div>
+                <div style="font-size: 0.9rem; color: #333;">Novo aniversário adicionado: <strong>Carlos Pereira</strong></div>
+                <small class="text-muted">Há 2 horas</small>
+            </div>
+        </li>
+        <li class="d-flex align-items-center py-2 border-bottom" style="border-color: rgba(0,0,0,0.05) !important;">
+            <i class="bi bi-pencil me-3" style="color: #e8a838; font-size: 1.1rem;"></i>
+            <div>
+                <div style="font-size: 0.9rem; color: #333;">Perfil atualizado: <strong>Maria Silva</strong></div>
+                <small class="text-muted">Há 5 horas</small>
+            </div>
+        </li>
+        <li class="d-flex align-items-center py-2">
+            <i class="bi bi-bell me-3" style="color: #5b8ddb; font-size: 1.1rem;"></i>
+            <div>
+                <div style="font-size: 0.9rem; color: #333;">Lembrete configurado para <strong>João Santos</strong></div>
+                <small class="text-muted">Ontem</small>
+            </div>
+        </li>
+    </ul>
+</div>

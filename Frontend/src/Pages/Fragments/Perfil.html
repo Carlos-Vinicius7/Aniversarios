@@ -1,0 +1,90 @@
+<!-- Fragment: Perfil -->
+<div class="fragment-header">
+    <h1>Perfil</h1>
+    <p>Gerencie suas informações pessoais</p>
+</div>
+
+<div class="row g-4">
+    <!-- Card de Perfil -->
+    <div class="col-lg-4">
+        <div class="fragment-card text-center">
+            <div class="mb-3" style="width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #4a7c59, #6db87e); display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2.2rem; color: white;">
+                <i class="bi bi-person"></i>
+            </div>
+            <h5 style="margin-bottom: 4px;">Carlos Vinícius</h5>
+            <p class="text-muted" style="font-size: 0.85rem;">carlos@email.com</p>
+            <span class="badge px-3 py-2" style="background-color: #4a7c59; border-radius: 20px; font-weight: 400;">
+                <i class="bi bi-patch-check me-1"></i>Conta Ativa
+            </span>
+        </div>
+    </div>
+
+    <!-- Card de Informações -->
+    <div class="col-lg-8">
+        <div class="fragment-card">
+            <h5><i class="bi bi-pencil-square me-2" style="color: #6db87e;"></i>Informações da Conta</h5>
+            <form class="mt-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" style="font-size: 0.85rem; font-weight: 500; color: #333;">Nome completo</label>
+                        <input type="text" class="form-control" value="Carlos Vinícius" style="border-radius: 10px; border: 1px solid #ddd; padding: 10px 14px; font-family: 'Outfit', sans-serif;">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" style="font-size: 0.85rem; font-weight: 500; color: #333;">E-mail</label>
+                        <input type="email" class="form-control" value="carlos@email.com" style="border-radius: 10px; border: 1px solid #ddd; padding: 10px 14px; font-family: 'Outfit', sans-serif;">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" style="font-size: 0.85rem; font-weight: 500; color: #333;">Telefone</label>
+                        <input type="tel" class="form-control" value="(11) 99999-9999" style="border-radius: 10px; border: 1px solid #ddd; padding: 10px 14px; font-family: 'Outfit', sans-serif;">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" style="font-size: 0.85rem; font-weight: 500; color: #333;">Data de nascimento</label>
+                        <input type="date" class="form-control" value="1998-05-15" style="border-radius: 10px; border: 1px solid #ddd; padding: 10px 14px; font-family: 'Outfit', sans-serif;">
+                    </div>
+                </div>
+                <button type="submit" class="btn mt-4 px-4 py-2" style="background-color: #1a2a22; color: white; border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 500;">
+                    <i class="bi bi-check-lg me-2"></i>Salvar Alterações
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Card de Preferências -->
+<div class="fragment-card mt-4">
+    <h5><i class="bi bi-gear me-2" style="color: #6db87e;"></i>Preferências</h5>
+    <div class="row g-3 mt-1">
+        <div class="col-md-6">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="notifEmail" checked style="cursor: pointer;">
+                <label class="form-check-label" for="notifEmail" style="font-size: 0.9rem; cursor: pointer;">
+                    Notificações por e-mail
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="notifPush" checked style="cursor: pointer;">
+                <label class="form-check-label" for="notifPush" style="font-size: 0.9rem; cursor: pointer;">
+                    Notificações push
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="lembrete3dias" checked style="cursor: pointer;">
+                <label class="form-check-label" for="lembrete3dias" style="font-size: 0.9rem; cursor: pointer;">
+                    Lembrete 3 dias antes
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="lembreteNoDia" style="cursor: pointer;">
+                <label class="form-check-label" for="lembreteNoDia" style="font-size: 0.9rem; cursor: pointer;">
+                    Lembrete no dia
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
