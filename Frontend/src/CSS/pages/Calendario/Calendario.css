@@ -1,0 +1,106 @@
+/* Custom styles for Calendario */
+.calendar-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.calendar-header h4 {
+    margin: 0;
+    font-weight: 600;
+    color: #1a2a22;
+}
+.calendar-nav-btn {
+    background: transparent;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 6px 12px;
+    color: #4a7c59;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.calendar-nav-btn:hover {
+    background: #f4faf6;
+    border-color: #6db87e;
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+.calendar-day-header {
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #888;
+    padding-bottom: 10px;
+}
+.calendar-day {
+    min-height: 100px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.2s;
+}
+.calendar-day:hover {
+    background-color: #fafafa;
+}
+.calendar-day.empty {
+    background-color: #fcfcfc;
+    border-color: transparent;
+}
+.calendar-day.today {
+    border: 2px solid #6db87e;
+    background-color: #f4faf6;
+}
+.calendar-day-number {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+    align-self: flex-end;
+    margin-bottom: 8px;
+}
+.calendar-day.today .calendar-day-number {
+    color: #4a7c59;
+    background: #e8f5ec;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.calendar-event {
+    background: rgba(74, 124, 89, 0.1);
+    color: #4a7c59;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 3px solid #4a7c59;
+    cursor: pointer;
+}
+.calendar-event:hover {
+    background: rgba(74, 124, 89, 0.2);
+}
+
+@media (max-width: 768px) {
+    .calendar-day {
+        min-height: 60px;
+        padding: 4px;
+    }
+    .calendar-event {
+        font-size: 0.65rem;
+        padding: 2px 4px;
+    }
+}

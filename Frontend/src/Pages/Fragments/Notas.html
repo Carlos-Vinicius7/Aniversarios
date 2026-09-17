@@ -1,46 +1,142 @@
-<!-- Fragment: Notas -->
-<div class="fragment-header">
-    <h1>Notas</h1>
-    <p>Anote ideias de presentes e lembretes pessoais</p>
-</div>
 
-<!-- Botão Adicionar -->
-<div class="mb-4">
+<!-- Fragment: Notas -->
+<div class="fragment-header d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+    <div class="mb-3 mb-md-0">
+        <h1>Notas</h1>
+        <p class="mb-0">Anote ideias de presentes e lembretes pessoais</p>
+    </div>
     <button class="btn px-4 py-2" style="background-color: #1a2a22; color: white; border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 500;">
         <i class="bi bi-plus-lg me-2"></i>Nova Nota
     </button>
 </div>
 
-<!-- Cards de Notas -->
-<div class="row g-4">
-    <div class="col-md-6 col-lg-4">
-        <div class="fragment-card h-100">
+<div class="notas-container">
+    <!-- Left Sidebar: Lista de Notas -->
+    <div class="notas-sidebar">
+        <!-- Card 1 (Active) -->
+        <div class="fragment-card nota-card-item active p-3">
             <div class="d-flex justify-content-between align-items-start mb-2">
-                <h5 class="mb-0" style="font-size: 1rem;">🎁 Presente para Maria</h5>
-                <span class="badge" style="background-color: #e8a838; font-size: 0.7rem;">Pendente</span>
+                <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; max-width: 80%;">🎁 Presente para Maria</h5>
             </div>
-            <p>Ela mencionou que queria um livro de receitas. Verificar na livraria da esquina.</p>
-            <small class="text-muted">Criada em 08/09/2026</small>
+            <p class="mb-2" style="font-size: 0.85rem; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Ela mencionou que queria um livro de receitas. Verificar na livraria da esquina e pesquisar online.</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <small class="text-muted" style="font-size: 0.75rem;">Há alguns segundos</small>
+                <span class="badge" style="background-color: #e8a838; font-size: 0.65rem;">Pendente</span>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="fragment-card nota-card-item p-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; max-width: 80%;">🎂 Festa do João</h5>
+            </div>
+            <p class="mb-2" style="font-size: 0.85rem; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Reservar restaurante para 15 pessoas. Ligar para confirmar até dia 18. Falar com a confeitaria do bolo.</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <small class="text-muted" style="font-size: 0.75rem;">10 min atrás</small>
+                <span class="badge" style="background-color: #4a7c59; font-size: 0.65rem;">Em andamento</span>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="fragment-card nota-card-item p-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; max-width: 80%;">💡 Ideias gerais</h5>
+            </div>
+            <p class="mb-2" style="font-size: 0.85rem; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Criar um grupo no WhatsApp para organizar surpresas. Pedir ajuda da Ana na decoração.</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <small class="text-muted" style="font-size: 0.75rem;">2 horas atrás</small>
+                <span class="badge bg-secondary" style="font-size: 0.65rem;">Rascunho</span>
+            </div>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="fragment-card nota-card-item p-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; max-width: 80%;">🎮 Jogo do Lucas</h5>
+            </div>
+            <p class="mb-2" style="font-size: 0.85rem; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Ele quer o novo lançamento para o console dele. Confirmar se a versão é a correta.</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <small class="text-muted" style="font-size: 0.75rem;">11/05/26</small>
+                <span class="badge" style="background-color: #6db87e; font-size: 0.65rem;">Concluído</span>
+            </div>
         </div>
     </div>
-    <div class="col-md-6 col-lg-4">
-        <div class="fragment-card h-100">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-                <h5 class="mb-0" style="font-size: 1rem;">🎂 Festa do João</h5>
-                <span class="badge" style="background-color: #4a7c59; font-size: 0.7rem;">Em andamento</span>
+
+    <!-- Right Main Area: Editor da Nota -->
+    <div class="notas-main fragment-card p-4">
+        <!-- Barra superior do editor (Ações e Ferramentas) -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-4">
+             <div class="editor-toolbar">
+                <button title="Inserir Mídia"><i class="bi bi-plus-circle text-primary"></i> Inserir</button>
+                <button title="Lista de Tarefas"><i class="bi bi-check2-square"></i></button>
+                <button title="Calendário"><i class="bi bi-calendar-event"></i></button>
+                <div class="vr mx-1"></div>
+                <button title="Desfazer"><i class="bi bi-arrow-counterclockwise"></i></button>
+                <button title="Refazer"><i class="bi bi-arrow-clockwise"></i></button>
+                <div class="vr mx-1"></div>
+                <button title="Negrito"><i class="bi bi-type-bold"></i></button>
+                <button title="Itálico"><i class="bi bi-type-italic"></i></button>
+                <button title="Cor"><i class="bi bi-palette"></i></button>
             </div>
-            <p>Reservar restaurante para 15 pessoas. Ligar para confirmar até dia 18.</p>
-            <small class="text-muted">Criada em 05/09/2026</small>
+            
+            <div class="d-flex align-items-center mt-2 mt-sm-0">
+                <button class="btn btn-sm text-white px-3 me-2" style="background-color: #536DFE; border-radius: 8px; font-weight: 500;">
+                    <i class="bi bi-share-fill me-1"></i> Compartilhar
+                </button>
+                
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 8px;">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="border-radius: 10px; border: 1px solid #eee;">
+                        <li><a class="dropdown-item py-2" href="#"><i class="bi bi-info-circle me-2 text-muted"></i>Detalhes da Nota</a></li>
+                        <li><a class="dropdown-item py-2" href="#"><i class="bi bi-tags me-2 text-muted"></i>Editar Etiquetas</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 text-danger" href="#"><i class="bi bi-trash3 me-2"></i>Excluir Nota</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6 col-lg-4">
-        <div class="fragment-card h-100">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-                <h5 class="mb-0" style="font-size: 1rem;">💡 Ideias gerais</h5>
-                <span class="badge bg-secondary" style="font-size: 0.7rem;">Rascunho</span>
+
+        <!-- Área de Conteúdo do Editor -->
+        <div class="editor-content-area flex-grow-1">
+            <input type="text" class="nota-editor-title" value="🎁 Presente para Maria" placeholder="Título da Nota">
+            
+            <p class="text-muted mb-4" style="font-size: 0.95rem;">
+                Uma seleção de ideias e opções de presentes, separados por categoria. Todas as opções respeitam o orçamento estabelecido.
+            </p>
+            
+            <h5 style="font-weight: 600; color: #222; margin-top: 10px;">Livraria da Esquina</h5>
+            <ul style="color: #444; line-height: 1.8;">
+                <li>Livro de Receitas Italianas Clássicas (R$ 80)</li>
+                <li>Conjunto de temperos e especiarias (R$ 45)</li>
+            </ul>
+
+            <!-- Mockup de Imagem (Representando anexo/imagem inserida) -->
+            <div style="background: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600&auto=format&fit=crop') center/cover no-repeat; border-radius: 12px; height: 250px; margin: 25px 0; position: relative;">
+                <!-- Fallback se imagem não carregar -->
+                <div style="background-color: rgba(0,0,0,0.3); border-radius: 12px; position: absolute; top:0; left:0; width:100%; height:100%; display: flex; align-items: center; justify-content: center; color: white;">
+                    <span style="background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem;"><i class="bi bi-image me-2"></i>Livros na loja</span>
+                </div>
             </div>
-            <p>Criar um grupo no WhatsApp para organizar surpresas. Pedir ajuda da Ana.</p>
-            <small class="text-muted">Criada em 01/09/2026</small>
+
+            <h5 style="font-weight: 600; color: #222; margin-top: 20px;">Alternativa: Perfumaria</h5>
+            <ul style="color: #444; line-height: 1.8;">
+                <li>Kit Sabonetes Artesanais (R$ 55)</li>
+                <li>Vela Aromática de Lavanda (R$ 70)</li>
+            </ul>
+            
+            <textarea class="nota-editor-content mt-4" placeholder="Continue digitando sua nota..."></textarea>
+        </div>
+        
+        <!-- Rodapé do Editor -->
+        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top text-muted" style="font-size: 0.8rem;">
+            <div>
+                <i class="bi bi-folder me-1"></i> Pessoal / Presentes
+            </div>
+            <div>
+                <i class="bi bi-check2-all text-success me-1"></i> Todas as alterações salvas
+            </div>
         </div>
     </div>
 </div>

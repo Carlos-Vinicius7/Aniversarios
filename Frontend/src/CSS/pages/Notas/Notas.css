@@ -1,0 +1,116 @@
+/* Custom styles for Notas */
+.notas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+@media (min-width: 992px) {
+    .notas-container {
+        flex-direction: row;
+        height: calc(100vh - 180px); /* Fill remaining height roughly */
+        align-items: stretch;
+    }
+}
+
+.notas-sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+@media (min-width: 992px) {
+    .notas-sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        overflow-y: auto;
+        padding-right: 5px;
+        /* Custom scrollbar for sidebar */
+        scrollbar-width: thin;
+        scrollbar-color: #ccc transparent;
+    }
+    .notas-sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .notas-sidebar::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 10px;
+    }
+}
+
+.nota-card-item {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+}
+.nota-card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.nota-card-item.active {
+    border-color: #6db87e;
+    background-color: #f4faf6;
+}
+
+.notas-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 500px;
+}
+
+.editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+.editor-toolbar button {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+.editor-toolbar button:hover {
+    background: #f0f0f0;
+}
+
+.nota-editor-title {
+    border: none;
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    width: 100%;
+    margin-bottom: 10px;
+    outline: none;
+    background: transparent;
+    color: #333;
+}
+.nota-editor-title::placeholder {
+    color: #ccc;
+}
+
+.nota-editor-content {
+    border: none;
+    width: 100%;
+    min-height: 200px;
+    outline: none;
+    resize: none;
+    font-family: 'Outfit', sans-serif;
+    background: transparent;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.nota-editor-content::placeholder {
+    color: #ccc;
+}
+
+.editor-content-area {
+    display: flex;
+    flex-direction: column;
+}
