@@ -1,0 +1,18 @@
+:root {
+    --bg-dark-purple: #1a0b2e;
+    --bg-light-purple: #3b1c5a;
+    --accent-magenta: #d925ac;
+    --accent-peach: #f4a261;
+    --accent-purple: #9d4edd;
+    --text-light: #f8f9fa;
+    --bg-very-dark: #0f0518;
+
+    /* Tons neutros para o tema claro (derivados da paleta acima) */
+    --bg-page: #f7f4fb;
+    --bg-surface: #ffffff;
+    --bg-surface-soft: #f1e9f8;
+    --text-heading: var(--bg-dark-purple);
+    --text-body: rgba(26, 11, 46, 0.72);
+    --text-muted: rgba(26, 11, 46, 0.5);
+    --border-subtle: rgba(26, 11, 46, 0.1);
+}

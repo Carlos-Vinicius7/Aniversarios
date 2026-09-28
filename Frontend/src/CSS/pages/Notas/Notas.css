@@ -1,3 +1,5 @@
+@import url(../../Global/global.css);
+
 /* Custom styles for Notas */
 .notas-container {
     display: flex;
@@ -26,13 +28,13 @@
         padding-right: 5px;
         /* Custom scrollbar for sidebar */
         scrollbar-width: thin;
-        scrollbar-color: #ccc transparent;
+        scrollbar-color: rgba(26, 11, 46, 0.2) transparent;
     }
     .notas-sidebar::-webkit-scrollbar {
         width: 6px;
     }
     .notas-sidebar::-webkit-scrollbar-thumb {
-        background-color: #ccc;
+        background-color: rgba(26, 11, 46, 0.2);
         border-radius: 10px;
     }
 }
@@ -47,8 +49,8 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 .nota-card-item.active {
-    border-color: #6db87e;
-    background-color: #f4faf6;
+    border-color: var(--accent-magenta);
+    background-color: rgba(157, 78, 221, 0.12);
 }
 
 .notas-main {
@@ -68,7 +70,7 @@
 .editor-toolbar button {
     background: none;
     border: none;
-    color: #555;
+    color: var(--text-body);
     cursor: pointer;
     padding: 6px 10px;
     border-radius: 6px;
@@ -76,7 +78,7 @@
     transition: background-color 0.2s;
 }
 .editor-toolbar button:hover {
-    background: #f0f0f0;
+    background: rgba(26, 11, 46, 0.06);
 }
 
 .nota-editor-title {
@@ -88,10 +90,10 @@
     margin-bottom: 10px;
     outline: none;
     background: transparent;
-    color: #333;
+    color: var(--text-heading);
 }
 .nota-editor-title::placeholder {
-    color: #ccc;
+    color: var(--text-muted);
 }
 
 .nota-editor-content {
@@ -102,12 +104,12 @@
     resize: none;
     font-family: 'Outfit', sans-serif;
     background: transparent;
-    color: #444;
+    color: var(--text-body);
     font-size: 1rem;
     line-height: 1.6;
 }
 .nota-editor-content::placeholder {
-    color: #ccc;
+    color: var(--text-muted);
 }
 
 .editor-content-area {

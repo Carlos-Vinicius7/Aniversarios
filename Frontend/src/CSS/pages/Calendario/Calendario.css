@@ -1,6 +1,8 @@
 /* Custom styles for Calendario */
+@import url(../../Global/global.css);
+
 .calendar-wrapper {
-    background: #fff;
+    background: var(--bg-surface);
     border-radius: 12px;
     padding: 20px;
 }
@@ -13,20 +15,20 @@
 .calendar-header h4 {
     margin: 0;
     font-weight: 600;
-    color: #1a2a22;
+    color: var(--text-heading);
 }
 .calendar-nav-btn {
     background: transparent;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-subtle);
     border-radius: 8px;
     padding: 6px 12px;
-    color: #4a7c59;
+    color: var(--accent-purple);
     cursor: pointer;
     transition: all 0.2s;
 }
 .calendar-nav-btn:hover {
-    background: #f4faf6;
-    border-color: #6db87e;
+    background: rgba(157, 78, 221, 0.12);
+    border-color: var(--accent-magenta);
 }
 .calendar-grid {
     display: grid;
@@ -37,12 +39,12 @@
     text-align: center;
     font-weight: 500;
     font-size: 0.85rem;
-    color: #888;
+    color: var(--text-muted);
     padding-bottom: 10px;
 }
 .calendar-day {
     min-height: 100px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--border-subtle);
     border-radius: 8px;
     padding: 8px;
     display: flex;
@@ -50,26 +52,26 @@
     transition: background-color 0.2s;
 }
 .calendar-day:hover {
-    background-color: #fafafa;
+    background-color: rgba(26, 11, 46, 0.03);
 }
 .calendar-day.empty {
-    background-color: #fcfcfc;
+    background-color: rgba(26, 11, 46, 0.015);
     border-color: transparent;
 }
 .calendar-day.today {
-    border: 2px solid #6db87e;
-    background-color: #f4faf6;
+    border: 2px solid var(--accent-magenta);
+    background-color: rgba(157, 78, 221, 0.12);
 }
 .calendar-day-number {
     font-weight: 600;
     font-size: 0.95rem;
-    color: #333;
+    color: var(--text-heading);
     align-self: flex-end;
     margin-bottom: 8px;
 }
 .calendar-day.today .calendar-day-number {
-    color: #4a7c59;
-    background: #e8f5ec;
+    color: var(--accent-purple);
+    background: rgba(157, 78, 221, 0.18);
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -78,8 +80,8 @@
     justify-content: center;
 }
 .calendar-event {
-    background: rgba(74, 124, 89, 0.1);
-    color: #4a7c59;
+    background: rgba(157, 78, 221, 0.15);
+    color: var(--accent-magenta);
     font-size: 0.75rem;
     padding: 4px 6px;
     border-radius: 4px;
@@ -87,11 +89,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-left: 3px solid #4a7c59;
+    border-left: 3px solid var(--accent-purple);
     cursor: pointer;
 }
 .calendar-event:hover {
-    background: rgba(74, 124, 89, 0.2);
+    background: rgba(157, 78, 221, 0.25);
 }
 
 @media (max-width: 768px) {

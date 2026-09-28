@@ -1,0 +1,80 @@
+@import url(../../Global/global.css);
+
+.profile-avatar {
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%; 
+    background: linear-gradient(135deg, var(--bg-light-purple), var(--accent-magenta)); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto; 
+    font-size: 2.2rem; 
+    color: var(--text-light);
+}
+
+.profile-name {
+    margin-bottom: 4px;
+    color: var(--text-heading);
+}
+
+.profile-email {
+    font-size: 0.85rem;
+    color: var(--text-muted) !important;
+}
+
+.profile-status-badge {
+    background-color: var(--bg-light-purple); 
+    color: var(--text-light);
+    border-radius: 20px; 
+    font-weight: 400;
+}
+
+.info-icon {
+    color: var(--accent-magenta);
+}
+
+.form-label-custom {
+    font-size: 0.85rem; 
+    font-weight: 500; 
+    color: var(--text-heading);
+}
+
+.form-control-custom {
+    border-radius: 10px; 
+    border: 1px solid rgba(157, 78, 221, 0.35); 
+    padding: 10px 14px; 
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-heading);
+}
+
+.form-control-custom:focus {
+    background-color: var(--bg-surface);
+    color: var(--text-heading);
+    border-color: var(--accent-magenta);
+    box-shadow: 0 0 0 0.25rem rgba(217, 37, 172, 0.25);
+}
+
+.btn-save-changes {
+    background-color: var(--accent-purple); 
+    color: var(--text-light); 
+    border-radius: 12px; 
+    font-family: 'Outfit', sans-serif; 
+    font-weight: 500;
+}
+
+.btn-save-changes:hover {
+    background-color: var(--accent-magenta);
+    color: var(--text-light);
+}
+
+.pref-label {
+    font-size: 0.9rem; 
+    cursor: pointer;
+    color: var(--text-heading);
+}
+
+.form-check-input {
+    cursor: pointer;
+}
