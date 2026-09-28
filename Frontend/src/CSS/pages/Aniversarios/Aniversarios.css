@@ -1,0 +1,20 @@
+@import url(../../Global/global.css);
+
+/* Aniversarios Specific Styles */
+.aniversarios-icon-title {
+    color: var(--accent-purple);
+}
+
+.aniversarios-btn-new {
+    background-color: var(--accent-purple);
+    border-color: var(--accent-purple);
+}
+
+.aniversarios-btn-new:hover {
+    background-color: var(--accent-magenta);
+    border-color: var(--accent-magenta);
+}
+
+.aniversarios-table-header {
+    color: var(--text-heading);
+}

@@ -1,1 +1,47 @@
 @import url(../../Global/global.css);
+
+/* Dashboard Specific Styles */
+.dashboard-icon-title {
+    color: var(--accent-purple);
+}
+
+.dashboard-table-header {
+    color: var(--text-heading);
+}
+
+.dashboard-badge-4 {
+    background-color: var(--accent-magenta);
+}
+
+.dashboard-badge-11 {
+    background-color: var(--accent-purple);
+}
+
+.dashboard-badge-20 {
+    background-color: #c9a8f0;
+    color: var(--text-heading);
+}
+
+.dashboard-activity-item {
+    border-color: rgba(26,11,46,0.06) !important;
+}
+
+.dashboard-activity-icon-new {
+    color: var(--accent-purple);
+    font-size: 1.1rem;
+}
+
+.dashboard-activity-icon-update {
+    color: var(--accent-peach);
+    font-size: 1.1rem;
+}
+
+.dashboard-activity-icon-alert {
+    color: var(--accent-magenta);
+    font-size: 1.1rem;
+}
+
+.dashboard-activity-text {
+    font-size: 0.9rem;
+    color: var(--text-heading);
+}

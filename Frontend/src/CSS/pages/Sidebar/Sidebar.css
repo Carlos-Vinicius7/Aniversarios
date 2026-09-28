@@ -89,7 +89,7 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--text-heading);
+    color: var(--text-light);
     letter-spacing: 0.5px;
     opacity: 1;
     transition: opacity var(--sidebar-transition), width var(--sidebar-transition);
@@ -149,7 +149,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.2px;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.5);
     padding: 16px 22px 8px;
     white-space: nowrap;
     overflow: hidden;
@@ -237,7 +237,7 @@ body {
 .sidebar-submenu .nav-link {
     padding: 9px 20px 9px 56px;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.5);
     margin: 1px 10px;
 }
 

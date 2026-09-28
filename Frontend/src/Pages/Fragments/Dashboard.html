@@ -38,15 +38,15 @@
 
 <!-- Próximos Aniversários -->
 <div class="fragment-card">
-    <h5><i class="bi bi-cake2 me-2" style="color: var(--accent-purple);"></i>Próximos Aniversários</h5>
+    <h5><i class="bi bi-cake2 me-2 dashboard-icon-title"></i>Próximos Aniversários</h5>
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead>
                 <tr>
-                    <th style="color: var(--text-heading);">Nome</th>
-                    <th style="color: var(--text-heading);">Data</th>
-                    <th style="color: var(--text-heading);">Idade</th>
-                    <th style="color: var(--text-heading);">Dias restantes</th>
+                    <th class="dashboard-table-header">Nome</th>
+                    <th class="dashboard-table-header">Data</th>
+                    <th class="dashboard-table-header">Idade</th>
+                    <th class="dashboard-table-header">Dias restantes</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,19 +54,19 @@
                     <td>Maria Silva</td>
                     <td>15 de Setembro</td>
                     <td>28 anos</td>
-                    <td><span class="badge" style="background-color: var(--accent-magenta);">4 dias</span></td>
+                    <td><span class="badge dashboard-badge-4">4 dias</span></td>
                 </tr>
                 <tr>
                     <td>João Santos</td>
                     <td>22 de Setembro</td>
                     <td>35 anos</td>
-                    <td><span class="badge" style="background-color: var(--accent-purple);">11 dias</span></td>
+                    <td><span class="badge dashboard-badge-11">11 dias</span></td>
                 </tr>
                 <tr>
                     <td>Ana Oliveira</td>
                     <td>01 de Outubro</td>
                     <td>42 anos</td>
-                    <td><span class="badge" style="background-color: #c9a8f0; color: var(--text-heading);">20 dias</span></td>
+                    <td><span class="badge dashboard-badge-20">20 dias</span></td>
                 </tr>
             </tbody>
         </table>
@@ -75,26 +75,26 @@
 
 <!-- Atividade Recente -->
 <div class="fragment-card">
-    <h5><i class="bi bi-clock-history me-2" style="color: var(--accent-purple);"></i>Atividade Recente</h5>
+    <h5><i class="bi bi-clock-history me-2 dashboard-icon-title"></i>Atividade Recente</h5>
     <ul class="list-unstyled mb-0">
-        <li class="d-flex align-items-center py-2 border-bottom" style="border-color: rgba(26,11,46,0.06) !important;">
-            <i class="bi bi-plus-circle me-3" style="color: var(--accent-purple); font-size: 1.1rem;"></i>
+        <li class="d-flex align-items-center py-2 border-bottom dashboard-activity-item">
+            <i class="bi bi-plus-circle me-3 dashboard-activity-icon-new"></i>
             <div>
-                <div style="font-size: 0.9rem; color: var(--text-heading);">Novo aniversário adicionado: <strong>Carlos Pereira</strong></div>
+                <div class="dashboard-activity-text">Novo aniversário adicionado: <strong>Carlos Pereira</strong></div>
                 <small class="text-muted">Há 2 horas</small>
             </div>
         </li>
-        <li class="d-flex align-items-center py-2 border-bottom" style="border-color: rgba(26,11,46,0.06) !important;">
-            <i class="bi bi-pencil me-3" style="color: var(--accent-peach); font-size: 1.1rem;"></i>
+        <li class="d-flex align-items-center py-2 border-bottom dashboard-activity-item">
+            <i class="bi bi-pencil me-3 dashboard-activity-icon-update"></i>
             <div>
-                <div style="font-size: 0.9rem; color: var(--text-heading);">Perfil atualizado: <strong>Maria Silva</strong></div>
+                <div class="dashboard-activity-text">Perfil atualizado: <strong>Maria Silva</strong></div>
                 <small class="text-muted">Há 5 horas</small>
             </div>
         </li>
         <li class="d-flex align-items-center py-2">
-            <i class="bi bi-bell me-3" style="color: var(--accent-magenta); font-size: 1.1rem;"></i>
+            <i class="bi bi-bell me-3 dashboard-activity-icon-alert"></i>
             <div>
-                <div style="font-size: 0.9rem; color: var(--text-heading);">Lembrete configurado para <strong>João Santos</strong></div>
+                <div class="dashboard-activity-text">Lembrete configurado para <strong>João Santos</strong></div>
                 <small class="text-muted">Ontem</small>
             </div>
         </li>
