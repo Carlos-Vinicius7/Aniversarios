@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Models\Aviso;
-use App\Repository\AvisoRepositoryMemoria;
+use App\Repository\AvisoRepositoryInterface;
 
 class AvisoService
 {
@@ -11,7 +11,7 @@ class AvisoService
     private const TIPO_NOTIFICACAO = 2;
     private const TIPO_MENSAGEM = 3;
     private const TIPO_ACAO = 4;
-    public function __construct(private AvisoRepositoryMemoria $repo) {}
+    public function __construct(private AvisoRepositoryInterface $repo) {}
     private function criar(int $pessoaId, int $tipoId, string $texto, string $obs = ''): Aviso
     {
         $aviso = new Aviso(

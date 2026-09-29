@@ -8,4 +8,5 @@ interface AvisoRepositoryInterface {
     public function save(Aviso $aviso): void;
     public function porPessoa(int $pessoaid): array;
     public function porTipo(int $avisoTipoId): array;
+    public function proximoId(): int;
 }
