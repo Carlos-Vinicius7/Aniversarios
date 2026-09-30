@@ -9,28 +9,28 @@
     <div class="col-lg-3 col-md-6">
         <div class="stat-card">
             <div class="stat-icon"><i class="bi bi-gift"></i></div>
-            <div class="stat-value">24</div>
+            <div class="stat-value" id="stat-total">0</div>
             <div class="stat-label">Aniversários cadastrados</div>
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
         <div class="stat-card">
             <div class="stat-icon"><i class="bi bi-calendar-event"></i></div>
-            <div class="stat-value">3</div>
+            <div class="stat-value" id="stat-semana">0</div>
             <div class="stat-label">Esta semana</div>
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
         <div class="stat-card">
-            <div class="stat-icon"><i class="bi bi-bell"></i></div>
-            <div class="stat-value">5</div>
-            <div class="stat-label">Lembretes ativos</div>
+            <div class="stat-icon"><i class="bi bi-journal-text"></i></div>
+            <div class="stat-value" id="stat-notas">0</div>
+            <div class="stat-label">Notas criadas</div>
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
         <div class="stat-card">
             <div class="stat-icon"><i class="bi bi-people"></i></div>
-            <div class="stat-value">12</div>
+            <div class="stat-value" id="stat-grupos">0</div>
             <div class="stat-label">Grupos</div>
         </div>
     </div>
@@ -49,54 +49,26 @@
                     <th class="dashboard-table-header">Dias restantes</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Maria Silva</td>
-                    <td>15 de Setembro</td>
-                    <td>28 anos</td>
-                    <td><span class="badge dashboard-badge-4">4 dias</span></td>
-                </tr>
-                <tr>
-                    <td>João Santos</td>
-                    <td>22 de Setembro</td>
-                    <td>35 anos</td>
-                    <td><span class="badge dashboard-badge-11">11 dias</span></td>
-                </tr>
-                <tr>
-                    <td>Ana Oliveira</td>
-                    <td>01 de Outubro</td>
-                    <td>42 anos</td>
-                    <td><span class="badge dashboard-badge-20">20 dias</span></td>
-                </tr>
+            <tbody id="dashboard-proximos-tbody">
+                <!-- Preenchido via JS -->
             </tbody>
         </table>
+    </div>
+    <div id="dashboard-proximos-vazio" class="text-center text-muted py-4" style="display: none;">
+        <i class="bi bi-gift" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
+        Nenhum aniversário cadastrado ainda.
     </div>
 </div>
 
 <!-- Atividade Recente -->
 <div class="fragment-card">
     <h5><i class="bi bi-clock-history me-2 dashboard-icon-title"></i>Atividade Recente</h5>
-    <ul class="list-unstyled mb-0">
-        <li class="d-flex align-items-center py-2 border-bottom dashboard-activity-item">
-            <i class="bi bi-plus-circle me-3 dashboard-activity-icon-new"></i>
-            <div>
-                <div class="dashboard-activity-text">Novo aniversário adicionado: <strong>Carlos Pereira</strong></div>
-                <small class="text-muted">Há 2 horas</small>
-            </div>
-        </li>
-        <li class="d-flex align-items-center py-2 border-bottom dashboard-activity-item">
-            <i class="bi bi-pencil me-3 dashboard-activity-icon-update"></i>
-            <div>
-                <div class="dashboard-activity-text">Perfil atualizado: <strong>Maria Silva</strong></div>
-                <small class="text-muted">Há 5 horas</small>
-            </div>
-        </li>
-        <li class="d-flex align-items-center py-2">
-            <i class="bi bi-bell me-3 dashboard-activity-icon-alert"></i>
-            <div>
-                <div class="dashboard-activity-text">Lembrete configurado para <strong>João Santos</strong></div>
-                <small class="text-muted">Ontem</small>
-            </div>
-        </li>
+    <ul class="list-unstyled mb-0" id="dashboard-atividades">
+        <!-- Preenchido via JS -->
     </ul>
+    <div id="dashboard-atividades-vazio" class="text-center text-muted py-4" style="display: none;">
+        <i class="bi bi-clock-history" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
+        Nenhuma atividade recente.
+    </div>
 </div>
+

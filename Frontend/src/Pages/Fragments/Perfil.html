@@ -11,8 +11,8 @@
             <div class="mb-3 profile-avatar">
                 <i class="bi bi-person"></i>
             </div>
-            <h5 class="profile-name">Carlos Vinícius</h5>
-            <p class="text-muted profile-email">carlos@email.com</p>
+            <h5 class="profile-name" id="perfil-display-nome">—</h5>
+            <p class="text-muted profile-email" id="perfil-display-email">—</p>
             <span class="badge px-3 py-2 profile-status-badge">
                 <i class="bi bi-patch-check me-1"></i>Conta Ativa
             </span>
@@ -23,28 +23,31 @@
     <div class="col-lg-8">
         <div class="fragment-card">
             <h5><i class="bi bi-pencil-square me-2 info-icon"></i>Informações da Conta</h5>
-            <form class="mt-3">
+            <form class="mt-3" id="form-perfil">
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label form-label-custom">Nome completo</label>
-                        <input type="text" class="form-control form-control-custom" value="Carlos Vinícius">
+                        <input type="text" id="perfil-nome" class="form-control form-control-custom" placeholder="Seu nome completo" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label form-label-custom">E-mail</label>
-                        <input type="email" class="form-control form-control-custom" value="carlos@email.com">
+                        <input type="email" id="perfil-email" class="form-control form-control-custom" placeholder="seu@email.com" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label form-label-custom">Telefone</label>
-                        <input type="tel" class="form-control form-control-custom" value="(11) 99999-9999">
+                        <input type="tel" id="perfil-telefone" class="form-control form-control-custom" placeholder="(00) 00000-0000">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label form-label-custom">Data de nascimento</label>
-                        <input type="date" class="form-control form-control-custom" value="1998-05-15">
+                        <input type="date" id="perfil-nascimento" class="form-control form-control-custom">
                     </div>
                 </div>
                 <button type="submit" class="btn mt-4 px-4 py-2 btn-save-changes">
                     <i class="bi bi-check-lg me-2"></i>Salvar Alterações
                 </button>
+                <span id="perfil-msg-salvo" class="ms-3 text-success" style="display: none; font-size: 0.9rem;">
+                    <i class="bi bi-check-circle me-1"></i>Salvo com sucesso!
+                </span>
             </form>
         </div>
     </div>
@@ -56,7 +59,7 @@
     <div class="row g-3 mt-1">
         <div class="col-md-6">
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="notifEmail" checked>
+                <input class="form-check-input" type="checkbox" id="notifEmail">
                 <label class="form-check-label pref-label" for="notifEmail">
                     Notificações por e-mail
                 </label>
@@ -64,7 +67,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="notifPush" checked>
+                <input class="form-check-input" type="checkbox" id="notifPush">
                 <label class="form-check-label pref-label" for="notifPush">
                     Notificações push
                 </label>
@@ -72,7 +75,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="lembrete3dias" checked>
+                <input class="form-check-input" type="checkbox" id="lembrete3dias">
                 <label class="form-check-label pref-label" for="lembrete3dias">
                     Lembrete 3 dias antes
                 </label>
@@ -88,3 +91,84 @@
         </div>
     </div>
 </div>
+
+<script>
+(function() {
+    const PERFIL_KEY = 'perfil';
+    const PREFS_KEY = 'preferencias';
+
+    // Elementos do formulário
+    const form = document.getElementById('form-perfil');
+    const nomeInput = document.getElementById('perfil-nome');
+    const emailInput = document.getElementById('perfil-email');
+    const telefoneInput = document.getElementById('perfil-telefone');
+    const nascimentoInput = document.getElementById('perfil-nascimento');
+    const displayNome = document.getElementById('perfil-display-nome');
+    const displayEmail = document.getElementById('perfil-display-email');
+    const msgSalvo = document.getElementById('perfil-msg-salvo');
+
+    // Checkboxes de preferências
+    const notifEmail = document.getElementById('notifEmail');
+    const notifPush = document.getElementById('notifPush');
+    const lembrete3dias = document.getElementById('lembrete3dias');
+    const lembreteNoDia = document.getElementById('lembreteNoDia');
+
+    // Carregar perfil salvo
+    function carregarPerfil() {
+        const perfil = JSON.parse(localStorage.getItem(PERFIL_KEY) || '{}');
+        nomeInput.value = perfil.nome || '';
+        emailInput.value = perfil.email || '';
+        telefoneInput.value = perfil.telefone || '';
+        nascimentoInput.value = perfil.nascimento || '';
+
+        displayNome.textContent = perfil.nome || '—';
+        displayEmail.textContent = perfil.email || '—';
+    }
+
+    // Carregar preferências salvas
+    function carregarPreferencias() {
+        const prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || '{}');
+        notifEmail.checked = prefs.notifEmail !== undefined ? prefs.notifEmail : false;
+        notifPush.checked = prefs.notifPush !== undefined ? prefs.notifPush : false;
+        lembrete3dias.checked = prefs.lembrete3dias !== undefined ? prefs.lembrete3dias : false;
+        lembreteNoDia.checked = prefs.lembreteNoDia !== undefined ? prefs.lembreteNoDia : false;
+    }
+
+    // Salvar preferências ao clicar
+    function salvarPreferencias() {
+        const prefs = {
+            notifEmail: notifEmail.checked,
+            notifPush: notifPush.checked,
+            lembrete3dias: lembrete3dias.checked,
+            lembreteNoDia: lembreteNoDia.checked
+        };
+        localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+    }
+
+    [notifEmail, notifPush, lembrete3dias, lembreteNoDia].forEach(cb => {
+        cb.addEventListener('change', salvarPreferencias);
+    });
+
+    // Salvar perfil
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const perfil = {
+            nome: nomeInput.value.trim(),
+            email: emailInput.value.trim(),
+            telefone: telefoneInput.value.trim(),
+            nascimento: nascimentoInput.value
+        };
+        localStorage.setItem(PERFIL_KEY, JSON.stringify(perfil));
+
+        displayNome.textContent = perfil.nome || '—';
+        displayEmail.textContent = perfil.email || '—';
+
+        // Feedback visual
+        msgSalvo.style.display = 'inline';
+        setTimeout(() => { msgSalvo.style.display = 'none'; }, 3000);
+    });
+
+    carregarPerfil();
+    carregarPreferencias();
+})();
+</script>

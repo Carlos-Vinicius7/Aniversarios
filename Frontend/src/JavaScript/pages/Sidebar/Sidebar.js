@@ -73,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const html = await response.text();
             contentArea.innerHTML = html;
+            document.dispatchEvent(new CustomEvent('app:fragment-loaded', {
+                detail: { path: fragmentPath }
+            }));
 
             // Re-trigger animação de entrada
             contentArea.style.animation = 'none';

@@ -4,16 +4,52 @@
     <p>Lista de todos os aniversários cadastrados no sistema</p>
 </div>
 
+<!-- Modal / Formulário de Cadastro -->
+<div class="fragment-card mb-4" id="form-aniversario-card" style="display: none;">
+    <h5 id="aniv-form-title"><i class="bi bi-person-plus me-2 aniversarios-icon-title"></i>Cadastrar Novo Aniversário</h5>
+    <form id="form-novo-aniversario" class="mt-3">
+        <input type="hidden" id="aniv-id">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="aniv-nome" class="form-label" style="font-weight: 500;">Nome</label>
+                <input type="text" id="aniv-nome" class="form-control" placeholder="Nome completo" required>
+            </div>
+            <div class="col-md-3">
+                <label for="aniv-data" class="form-label" style="font-weight: 500;">Data de Nascimento</label>
+                <input type="date" id="aniv-data" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label for="aniv-grupo" class="form-label" style="font-weight: 500;">Grupo/Categoria</label>
+                <select id="aniv-grupo" class="form-select">
+                    <option value="Família">Família</option>
+                    <option value="Amigos">Amigos</option>
+                    <option value="Trabalho">Trabalho</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+            <div class="col-md-2 d-flex flex-column justify-content-end gap-2">
+                <button type="submit" class="btn aniversarios-btn-new w-100" id="btn-salvar-aniversario">
+                    <i class="bi bi-check-lg me-1"></i> Salvar
+                </button>
+                <button type="button" class="btn btn-outline-secondary w-100 d-none" id="btn-cancelar-edicao-aniversario">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Lista -->
 <div class="fragment-card">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h5><i class="bi bi-gift me-2 aniversarios-icon-title"></i>Todos os Aniversários</h5>
-        <button class="btn btn-primary aniversarios-btn-new">
+        <h5 class="mb-0"><i class="bi bi-gift me-2 aniversarios-icon-title"></i>Todos os Aniversários</h5>
+        <button class="btn btn-primary aniversarios-btn-new" id="btn-toggle-form-aniversario">
             <i class="bi bi-plus-lg me-1"></i> Novo
         </button>
     </div>
-    
+
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0" id="tabela-aniversarios">
             <thead>
                 <tr>
                     <th class="aniversarios-table-header">Nome</th>
@@ -23,48 +59,16 @@
                     <th class="aniversarios-table-header text-end">Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Maria Silva</td>
-                    <td>15/09/1996</td>
-                    <td>28 anos</td>
-                    <td><span class="badge bg-light text-dark border">Família</span></td>
-                    <td class="text-end">
-                        <button class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>João Santos</td>
-                    <td>22/09/1989</td>
-                    <td>35 anos</td>
-                    <td><span class="badge bg-light text-dark border">Amigos</span></td>
-                    <td class="text-end">
-                        <button class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ana Oliveira</td>
-                    <td>01/10/1982</td>
-                    <td>42 anos</td>
-                    <td><span class="badge bg-light text-dark border">Trabalho</span></td>
-                    <td class="text-end">
-                        <button class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Carlos Pereira</td>
-                    <td>10/11/1990</td>
-                    <td>33 anos</td>
-                    <td><span class="badge bg-light text-dark border">Amigos</span></td>
-                    <td class="text-end">
-                        <button class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
+            <tbody id="aniversarios-tbody">
+                <!-- Preenchido via JS -->
             </tbody>
         </table>
     </div>
+
+    <div id="aniversarios-vazio" class="text-center text-muted py-5" style="display: none;">
+        <i class="bi bi-gift" style="font-size: 2.5rem; display: block; margin-bottom: 10px;"></i>
+        Nenhum aniversário cadastrado ainda.<br>
+        <small>Clique em "Novo" para adicionar o primeiro.</small>
+    </div>
 </div>
+

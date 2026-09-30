@@ -9,12 +9,12 @@
 <!-- Calendário Completo -->
 <div class="calendar-wrapper fragment-card mb-4">
     <div class="calendar-header">
-        <button class="calendar-nav-btn"><i class="bi bi-chevron-left"></i></button>
-        <h4>Setembro 2026</h4>
-        <button class="calendar-nav-btn"><i class="bi bi-chevron-right"></i></button>
+        <button class="calendar-nav-btn" id="cal-prev"><i class="bi bi-chevron-left"></i></button>
+        <h4 id="cal-titulo">Carregando...</h4>
+        <button class="calendar-nav-btn" id="cal-next"><i class="bi bi-chevron-right"></i></button>
     </div>
     
-    <div class="calendar-grid">
+    <div class="calendar-grid" id="cal-grid">
         <!-- Dias da semana -->
         <div class="calendar-day-header">Dom</div>
         <div class="calendar-day-header">Seg</div>
@@ -23,158 +23,37 @@
         <div class="calendar-day-header">Qui</div>
         <div class="calendar-day-header">Sex</div>
         <div class="calendar-day-header">Sáb</div>
-
-        <!-- Semana 1 (começando em 1 na terça para set 2026) -->
-        <div class="calendar-day empty"></div>
-        <div class="calendar-day empty"></div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">1</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">2</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">3</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">4</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">5</span>
-            <div class="calendar-event" title="Pedro Almeida - 30 anos">🎂 Pedro (30)</div>
-        </div>
-
-        <!-- Semana 2 -->
-        <div class="calendar-day">
-            <span class="calendar-day-number">6</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">7</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">8</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">9</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">10</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">11</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">12</span>
-        </div>
-
-        <!-- Semana 3 -->
-        <div class="calendar-day">
-            <span class="calendar-day-number">13</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">14</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">15</span>
-            <div class="calendar-event" title="Maria Silva - 28 anos">🎁 Maria (28)</div>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">16</span>
-        </div>
-        <div class="calendar-day today">
-            <span class="calendar-day-number">17</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">18</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">19</span>
-        </div>
-
-        <!-- Semana 4 -->
-        <div class="calendar-day">
-            <span class="calendar-day-number">20</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">21</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">22</span>
-            <div class="calendar-event" title="João Santos - 35 anos">🎉 João (35)</div>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">23</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">24</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">25</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">26</span>
-        </div>
-
-        <!-- Semana 5 -->
-        <div class="calendar-day">
-            <span class="calendar-day-number">27</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">28</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">29</span>
-        </div>
-        <div class="calendar-day">
-            <span class="calendar-day-number">30</span>
-        </div>
-        <div class="calendar-day empty"></div>
-        <div class="calendar-day empty"></div>
-        <div class="calendar-day empty"></div>
+        <!-- Dias do mês preenchidos via JS -->
     </div>
 </div>
+
+<section class="fragment-card mb-4" id="cal-dia-detalhes" hidden aria-live="polite">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0" id="cal-dia-titulo">Detalhes do dia</h5>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="cal-dia-fechar">Fechar</button>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <h6>Aniversários</h6>
+            <div id="cal-dia-aniversarios"></div>
+        </div>
+        <div class="col-lg-6">
+            <h6>Notas salvas nesse dia</h6>
+            <div id="cal-dia-notas"></div>
+        </div>
+    </div>
+    <p class="text-muted mb-0 mt-3" id="cal-dia-vazio" hidden>Nenhum aniversário ou nota registrada neste dia.</p>
+</section>
 
 <div class="row g-4">
     <div class="col-lg-6">
         <div class="fragment-card h-100">
-            <h5><i class="bi bi-calendar3 me-2" style="color: var(--accent-purple);"></i>Aniversários do Mês - Setembro 2026</h5>
-            <div class="row g-3 mt-2">
-                <div class="col-12">
-                    <div class="p-3 rounded-3 d-flex justify-content-between align-items-center" style="background: rgba(157, 78, 221, 0.08); border-left: 3px solid var(--accent-purple);">
-                        <div>
-                            <div class="d-flex align-items-center gap-2 mb-1">
-                                <i class="bi bi-calendar-date" style="color: var(--accent-purple);"></i>
-                                <strong style="font-size: 0.9rem; color: var(--text-heading);">05 de Setembro</strong>
-                            </div>
-                            <p class="mb-0" style="font-size: 0.85rem; color: var(--text-body);">Pedro Almeida - 30 anos</p>
-                        </div>
-                        <button class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;"><i class="bi bi-gift"></i></button>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="p-3 rounded-3 d-flex justify-content-between align-items-center" style="background: rgba(157, 78, 221, 0.08); border-left: 3px solid var(--accent-purple);">
-                        <div>
-                            <div class="d-flex align-items-center gap-2 mb-1">
-                                <i class="bi bi-calendar-date" style="color: var(--accent-purple);"></i>
-                                <strong style="font-size: 0.9rem; color: var(--text-heading);">15 de Setembro</strong>
-                            </div>
-                            <p class="mb-0" style="font-size: 0.85rem; color: var(--text-body);">Maria Silva - 28 anos</p>
-                        </div>
-                        <button class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;"><i class="bi bi-gift"></i></button>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="p-3 rounded-3 d-flex justify-content-between align-items-center" style="background: rgba(157, 78, 221, 0.08); border-left: 3px solid var(--accent-purple);">
-                        <div>
-                            <div class="d-flex align-items-center gap-2 mb-1">
-                                <i class="bi bi-calendar-date" style="color: var(--accent-purple);"></i>
-                                <strong style="font-size: 0.9rem; color: var(--text-heading);">22 de Setembro</strong>
-                            </div>
-                            <p class="mb-0" style="font-size: 0.85rem; color: var(--text-body);">João Santos - 35 anos</p>
-                        </div>
-                        <button class="btn btn-sm btn-outline-secondary" style="border-radius: 8px;"><i class="bi bi-gift"></i></button>
-                    </div>
-                </div>
+            <h5><i class="bi bi-calendar3 me-2" style="color: var(--accent-purple);"></i>Aniversários do Mês - <span id="cal-mes-titulo"></span></h5>
+            <div id="cal-lista-mes" class="mt-3">
+                <!-- Preenchido via JS -->
+            </div>
+            <div id="cal-lista-mes-vazio" class="text-center text-muted py-4" style="display: none;">
+                Nenhum aniversário neste mês.
             </div>
         </div>
     </div>
@@ -182,57 +61,10 @@
     <div class="col-lg-6">
         <div class="fragment-card h-100">
             <h5><i class="bi bi-bar-chart me-2" style="color: var(--accent-purple);"></i>Resumo por Mês</h5>
-            <div class="row g-2 mt-2">
-                <div class="col-md-3 col-4">
-                    <div class="text-center p-2 rounded-3" style="background: rgba(157, 78, 221, 0.06);">
-                        <div style="font-weight: 600; color: var(--text-heading);">Jan</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-purple);">2</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-4">
-                    <div class="text-center p-2 rounded-3" style="background: rgba(157, 78, 221, 0.06);">
-                        <div style="font-weight: 600; color: var(--text-heading);">Fev</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-purple);">1</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-4">
-                    <div class="text-center p-2 rounded-3" style="background: rgba(157, 78, 221, 0.06);">
-                        <div style="font-weight: 600; color: var(--text-heading);">Mar</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-purple);">4</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-4">
-                    <div class="text-center p-2 rounded-3" style="background: rgba(157, 78, 221, 0.15); border: 1px solid rgba(157, 78, 221, 0.3);">
-                        <div style="font-weight: 600; color: var(--text-heading);">Set</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-purple);">3</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-4">
-                    <div class="text-center p-2 rounded-3" style="background: rgba(157, 78, 221, 0.06);">
-                        <div style="font-weight: 600; color: var(--text-heading);">Out</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-purple);">2</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-4">
-                    <div class="text-center p-2 rounded-3" style="background: rgba(157, 78, 221, 0.06);">
-                        <div style="font-weight: 600; color: var(--text-heading);">Nov</div>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-purple);">5</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-4 pt-3 border-top">
-                <h6 style="color: var(--text-body); font-weight: 600;">Próximo grande evento:</h6>
-                <div class="d-flex align-items-center mt-2">
-                    <div style="width: 40px; height: 40px; border-radius: 8px; background: var(--accent-peach); color: var(--text-heading); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; margin-right: 12px;">
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div>
-                        <strong style="color: var(--text-heading); font-size: 0.95rem;">Aniversário de 50 anos da Mãe</strong>
-                        <p class="mb-0 text-muted" style="font-size: 0.8rem;">12 de Outubro - Faltam 25 dias</p>
-                    </div>
-                </div>
+            <div class="row g-2 mt-2" id="cal-resumo-meses">
+                <!-- Preenchido via JS -->
             </div>
         </div>
     </div>
 </div>
+

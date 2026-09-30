@@ -18,4 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
             cadastroContainer.style.display = 'block';
         });
     }
+
+    const formLogin = document.querySelector('.formulario-login');
+    const formCadastro = document.querySelector('.formulario-cadastro');
+
+    if (formLogin) {
+        formLogin.addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = './Pages/App/app.html';
+        });
+    }
+
+    if (formCadastro) {
+        formCadastro.addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = './Pages/App/app.html';
+        });
+    }
 });

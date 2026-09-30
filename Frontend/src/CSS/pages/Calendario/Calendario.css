@@ -49,7 +49,12 @@
     padding: 8px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     transition: background-color 0.2s;
+}
+.calendar-day:focus-visible {
+    outline: 2px solid var(--accent-magenta);
+    outline-offset: 2px;
 }
 .calendar-day:hover {
     background-color: rgba(26, 11, 46, 0.03);
@@ -57,6 +62,7 @@
 .calendar-day.empty {
     background-color: rgba(26, 11, 46, 0.015);
     border-color: transparent;
+    cursor: default;
 }
 .calendar-day.today {
     border: 2px solid var(--accent-magenta);
