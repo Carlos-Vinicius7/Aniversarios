@@ -45,22 +45,55 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('app:fragment-loaded', event => {
         if (event.detail.path.endsWith('Aniversarios.html')) {
             renderizarAniversarios();
+            limparFormularioAniversario();
         }
     });
+
+    function iniciaisDe(nome) {
+        const partes = nome.trim().split(/\s+/).filter(Boolean);
+        if (!partes.length) return '?';
+        const primeira = partes[0][0];
+        const ultima = partes.length > 1 ? partes[partes.length - 1][0] : '';
+        return (primeira + ultima).toUpperCase();
+    }
+
+    function atualizarAvatarPreview() {
+        const avatar = document.getElementById('aniv-modal-avatar');
+        const nome = document.getElementById('aniv-nome').value;
+        if (avatar) avatar.textContent = iniciaisDe(nome);
+    }
+
+    function marcarGrupoSelecionado(grupo) {
+        const radios = document.querySelectorAll('.aniv-grupo-input');
+        radios.forEach(radio => { radio.checked = radio.value === grupo; });
+        if (![...radios].some(radio => radio.checked)) radios[0].checked = true;
+    }
+
+    function grupoSelecionado() {
+        const marcado = document.querySelector('.aniv-grupo-input:checked');
+        return marcado ? marcado.value : 'Geral';
+    }
+
+    function abrirModalAniversario() {
+        const modalEl = document.getElementById('modal-aniversario');
+        if (modalEl) bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    }
+
+    function fecharModalAniversario() {
+        const modalEl = document.getElementById('modal-aniversario');
+        if (modalEl) bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+    }
 
     function limparFormularioAniversario() {
         const form = document.getElementById('form-novo-aniversario');
         if (!form) return;
         form.reset();
         document.getElementById('aniv-id').value = '';
-        document.getElementById('aniv-form-title').innerHTML =
-            '<i class="bi bi-person-plus me-2 aniversarios-icon-title"></i>Cadastrar Novo Aniversário';
+        document.getElementById('aniv-form-title').textContent = 'Novo Aniversário';
         document.getElementById('btn-salvar-aniversario').innerHTML =
             '<i class="bi bi-check-lg me-1"></i> Salvar';
-        document.getElementById('btn-cancelar-edicao-aniversario').classList.add('d-none');
-        document.getElementById('form-aniversario-card').style.display = 'none';
-        document.getElementById('btn-toggle-form-aniversario').innerHTML =
-            '<i class="bi bi-plus-lg me-1"></i> Novo';
+        marcarGrupoSelecionado('Família');
+        atualizarAvatarPreview();
     }
 
     document.addEventListener('click', event => {
@@ -71,34 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('aniv-id').value = aniversario.id;
             document.getElementById('aniv-nome').value = aniversario.nome;
             document.getElementById('aniv-data').value = aniversario.dataNascimento;
-            document.getElementById('aniv-grupo').value = aniversario.grupo;
+            marcarGrupoSelecionado(aniversario.grupo);
+            atualizarAvatarPreview();
             document.getElementById('aniv-form-title').textContent = 'Editar Aniversário';
             document.getElementById('btn-salvar-aniversario').innerHTML =
                 '<i class="bi bi-check-lg me-1"></i> Atualizar';
-            document.getElementById('btn-cancelar-edicao-aniversario').classList.remove('d-none');
-            document.getElementById('form-aniversario-card').style.display = 'block';
-            document.getElementById('btn-toggle-form-aniversario').innerHTML =
-                '<i class="bi bi-x-lg me-1"></i> Cancelar';
-            document.getElementById('aniv-nome').focus();
+            abrirModalAniversario();
             return;
         }
 
-        if (event.target.closest('#btn-cancelar-edicao-aniversario')) {
+        if (event.target.closest('#btn-toggle-form-aniversario')) {
             limparFormularioAniversario();
-            return;
-        }
-
-        const toggle = event.target.closest('#btn-toggle-form-aniversario');
-        if (toggle) {
-            const formCard = document.getElementById('form-aniversario-card');
-            const visivel = formCard.style.display !== 'none';
-            if (visivel) {
-                limparFormularioAniversario();
-            } else {
-                limparFormularioAniversario();
-                formCard.style.display = 'block';
-                toggle.innerHTML = '<i class="bi bi-x-lg me-1"></i> Cancelar';
-            }
             return;
         }
 
@@ -109,13 +125,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    document.addEventListener('input', event => {
+        if (event.target.id === 'aniv-nome') atualizarAvatarPreview();
+    });
+
+    // Delegado em document porque o fragmento (e o modal) é injetado dinamicamente;
+    // o evento 'hidden.bs.modal' do Bootstrap borbulha normalmente pelo DOM.
+    document.addEventListener('hidden.bs.modal', event => {
+        if (event.target.id === 'modal-aniversario') limparFormularioAniversario();
+    });
+
     document.addEventListener('submit', event => {
         if (event.target.id !== 'form-novo-aniversario') return;
         event.preventDefault();
 
         const nome = document.getElementById('aniv-nome').value.trim();
         const dataNascimento = document.getElementById('aniv-data').value;
-        const grupo = document.getElementById('aniv-grupo').value;
+        const grupo = grupoSelecionado();
         if (!nome || !dataNascimento) return;
 
         const id = document.getElementById('aniv-id').value;
@@ -124,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             AppData.adicionarAniversario({ nome, dataNascimento, grupo });
         }
-        limparFormularioAniversario();
+        fecharModalAniversario();
         renderizarAniversarios();
     });
 });

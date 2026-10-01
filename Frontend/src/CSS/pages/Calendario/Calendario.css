@@ -101,6 +101,14 @@
 .calendar-event:hover {
     background: rgba(157, 78, 221, 0.25);
 }
+.calendar-event-nota {
+    background: rgba(244, 162, 97, 0.18);
+    color: #8a4a12;
+    border-left: 3px solid var(--accent-peach);
+}
+.calendar-event-nota:hover {
+    background: rgba(244, 162, 97, 0.3);
+}
 
 @media (max-width: 768px) {
     .calendar-day {

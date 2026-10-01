@@ -21,6 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
             aniversariosPorDia[aniversario.dia].push(aniversario);
         });
 
+        const notasPorDia = {};
+        AppData.getNotas().forEach(nota => {
+            if (!nota.data) return;
+            const [ano, mes, dia] = nota.data.split('-').map(Number);
+            if (ano === anoAtual && mes - 1 === mesAtual) {
+                if (!notasPorDia[dia]) notasPorDia[dia] = [];
+                notasPorDia[dia].push(nota);
+            }
+        });
+
         for (let vazio = 0; vazio < primeiroDia; vazio++) {
             const celula = document.createElement('div');
             celula.className = 'calendar-day empty';
@@ -48,6 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 evento.textContent = `🎂 ${aniversario.nome.split(' ')[0]} (${aniversario.idade})`;
                 celula.appendChild(evento);
             });
+
+            (notasPorDia[dia] || []).forEach(nota => {
+                const eventoNota = document.createElement('div');
+                eventoNota.className = 'calendar-event calendar-event-nota';
+                eventoNota.title = nota.titulo;
+                eventoNota.textContent = `📝 ${nota.titulo}`;
+                celula.appendChild(eventoNota);
+            });
             grid.appendChild(celula);
         }
 
@@ -74,13 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const vazio = document.getElementById('cal-dia-vazio');
         const aniversarios = AppData.getAniversariosDoMes(mes - 1, ano)
             .filter(aniversario => aniversario.dia === dia);
-        const notas = AppData.getNotas().filter(nota => {
-            if (!nota.criadoEm) return false;
-            const criadaEm = new Date(nota.criadoEm);
-            return criadaEm.getFullYear() === ano
-                && criadaEm.getMonth() === mes - 1
-                && criadaEm.getDate() === dia;
-        });
+        const notas = AppData.getNotasDoDia(dataISO);
 
         titulo.textContent = dataSelecionada.toLocaleDateString('pt-BR', {
             weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'

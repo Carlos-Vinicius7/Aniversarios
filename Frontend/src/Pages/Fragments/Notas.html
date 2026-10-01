@@ -1,13 +1,8 @@
 
 <!-- Fragment: Notas -->
-<div class="fragment-header d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
-    <div class="mb-3 mb-md-0">
-        <h1>Notas</h1>
-        <p class="mb-0">Anote ideias de presentes e lembretes pessoais</p>
-    </div>
-    <button class="btn px-4 py-2" id="btn-nova-nota" style="background-color: var(--accent-purple); color: var(--text-light); border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 500;">
-        <i class="bi bi-plus-lg me-2"></i>Nova Nota
-    </button>
+<div class="fragment-header mb-4">
+    <h1>Notas</h1>
+    <p class="mb-0">Anote ideias de presentes e lembretes pessoais — escolha o dia em que a nota deve aparecer no calendário</p>
 </div>
 
 <div class="notas-container">
@@ -25,9 +20,15 @@
         <div class="editor-content-area flex-grow-1">
             <form id="form-nova-nota">
                 <input type="hidden" id="nota-id">
-                <input type="text" id="nota-titulo" class="form-control mb-3" style="border: none; font-size: 1.5rem; font-weight: 600; background: transparent; box-shadow: none;" placeholder="Título da Nota" required>
-                
-                <textarea id="nota-conteudo" class="form-control mb-3" style="border: none; resize: none; min-height: 280px; background: transparent; font-size: 0.95rem; box-shadow: none;" placeholder="Escreva o conteúdo da sua nota aqui..." required></textarea>
+                <input type="text" id="nota-titulo" class="form-control mb-2" style="border: none; font-size: 1.5rem; font-weight: 600; background: transparent; box-shadow: none;" placeholder="Título da Nota" required>
+
+                <div class="d-flex align-items-center gap-2 mb-3" id="nota-data-wrapper">
+                    <i class="bi bi-calendar-event" style="color: var(--accent-purple);"></i>
+                    <label for="nota-data" class="mb-0 me-1" style="font-size: 0.85rem; color: var(--text-body);">Nota para o dia:</label>
+                    <input type="date" id="nota-data" class="form-control form-control-sm" style="max-width: 170px;" required>
+                </div>
+
+                <textarea id="nota-conteudo" class="form-control mb-3" style="border: none; resize: none; min-height: 260px; background: transparent; font-size: 0.95rem; box-shadow: none;" placeholder="Escreva o conteúdo da sua nota aqui..." required></textarea>
                 
                 <div class="d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-outline-secondary d-none" id="btn-cancelar-edicao-nota">Cancelar</button>

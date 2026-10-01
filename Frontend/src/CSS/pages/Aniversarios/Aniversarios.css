@@ -18,3 +18,138 @@
 .aniversarios-table-header {
     color: var(--text-heading);
 }
+
+/* ============================================
+   MODAL DE CADASTRO / EDIÇÃO — estilo "cartão dividido"
+   ============================================ */
+.aniv-modal-content {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.aniv-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    opacity: 0.6;
+}
+.aniv-modal-close:hover {
+    opacity: 1;
+}
+
+.aniv-modal-side {
+    flex: 0 0 38%;
+    max-width: 38%;
+    background: linear-gradient(160deg, var(--bg-light-purple), var(--accent-magenta));
+    color: var(--text-light);
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.aniv-modal-avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: rgba(248, 249, 250, 0.18);
+    border: 2px solid rgba(248, 249, 250, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.aniv-modal-side-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.aniv-modal-side-text {
+    font-size: 0.82rem;
+    opacity: 0.85;
+    margin-bottom: 0;
+}
+
+.aniv-modal-fields {
+    flex: 1 1 62%;
+    max-width: 62%;
+    background: var(--bg-surface);
+    padding: 40px 28px;
+}
+
+.aniv-modal-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.aniv-modal-input {
+    border-radius: 10px;
+    border: 1px solid rgba(157, 78, 221, 0.3);
+}
+
+.aniv-modal-input:focus {
+    border-color: var(--accent-magenta);
+    box-shadow: 0 0 0 0.2rem rgba(217, 37, 172, 0.15);
+}
+
+.aniv-modal-grupos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.aniv-grupo-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.aniv-grupo-pill {
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1.5px solid rgba(157, 78, 221, 0.3);
+    color: var(--text-body);
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.aniv-grupo-input:checked + .aniv-grupo-pill {
+    background: var(--accent-purple);
+    border-color: var(--accent-purple);
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.aniv-grupo-input:focus-visible + .aniv-grupo-pill {
+    outline: 2px solid var(--accent-magenta);
+    outline-offset: 2px;
+}
+
+@media (max-width: 575.98px) {
+    .aniv-modal-side,
+    .aniv-modal-fields {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    .aniv-modal-side {
+        padding: 28px 20px;
+    }
+}

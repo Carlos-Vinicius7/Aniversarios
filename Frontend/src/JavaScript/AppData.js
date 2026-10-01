@@ -198,6 +198,7 @@ const AppData = (() => {
             id: Date.now().toString(),
             titulo: dados.titulo,
             conteudo: dados.conteudo,
+            data: dados.data,
             criadoEm: new Date().toISOString()
         };
         lista.unshift(nova);
@@ -215,11 +216,16 @@ const AppData = (() => {
             ...lista[indice],
             titulo: dados.titulo,
             conteudo: dados.conteudo,
+            data: dados.data,
             atualizadoEm: new Date().toISOString()
         };
         salvarNotas(lista);
         adicionarAtividade(`Nota atualizada: <strong>${dados.titulo}</strong>`);
         return lista[indice];
+    }
+
+    function getNotasDoDia(dataISO) {
+        return getNotas().filter(nota => nota.data === dataISO);
     }
 
     function removerNota(id) {
@@ -268,6 +274,7 @@ const AppData = (() => {
         adicionarNota,
         atualizarNota,
         removerNota,
+        getNotasDoDia,
         // Atividades
         getAtividades,
         // Helpers
