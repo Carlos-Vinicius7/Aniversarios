@@ -1,3 +1,5 @@
+const appUrl = new URL('../../../Pages/App/app.html', document.currentScript.src).href;
+
 document.addEventListener('DOMContentLoaded', () => {
     const linkToLogin = document.getElementById('link-to-login');
     const linkToCadastro = document.getElementById('link-to-cadastro');
@@ -25,14 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formLogin) {
         formLogin.addEventListener('submit', function(e) {
             e.preventDefault();
-            window.location.href = './Pages/App/app.html';
+            window.location.href = appUrl;
         });
     }
 
     if (formCadastro) {
         formCadastro.addEventListener('submit', function(e) {
             e.preventDefault();
-            window.location.href = './Pages/App/app.html';
+            window.location.href = appUrl;
         });
     }
 });
