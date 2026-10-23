@@ -68,7 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         try {
-            const response = await fetch(fragmentPath);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            const response = await fetch(fragmentPath, { signal: controller.signal });
+            clearTimeout(timeoutId);
             if (!response.ok) throw new Error(`Erro ao carregar: ${response.status}`);
 
             const html = await response.text();
@@ -84,11 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Erro ao carregar fragmento:', error);
+            const motivo = error.name === 'AbortError'
+                ? 'O servidor demorou demais para responder.'
+                : 'Não foi possível carregar a página solicitada.';
             contentArea.innerHTML = `
                 <div class="fragment-card" style="text-align: center; padding: 60px 24px;">
                     <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545; margin-bottom: 16px; display: block;"></i>
                     <h5>Erro ao carregar conteúdo</h5>
-                    <p style="color: #6c757d;">Não foi possível carregar a página solicitada.</p>
+                    <p style="color: #6c757d;">${motivo}</p>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="location.reload()">Tentar novamente</button>
                 </div>
             `;
         }

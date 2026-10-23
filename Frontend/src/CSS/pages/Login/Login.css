@@ -12,7 +12,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.container {
+.pagina-autenticacao {
     width: 100%;
     max-width: 1200px;
     min-height: 100vh;
@@ -20,14 +20,17 @@ body {
     padding: 2rem;
 }
 
-.brand-section {
+.area-marca {
     flex: 1;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.5rem;
     padding: 2rem;
 }
 
-.logo {
+.marca {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -35,30 +38,43 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-.logo h1 {
+.marca h1 {
     font-family: 'Playfair Display', serif;
     font-size: 4rem;
     font-weight: 700;
 }
 
-.logo i {
+.link-inicio {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    text-decoration: none;
+    opacity: 0.85;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.link-inicio:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.marca i {
     font-size: 2.5rem;
     color: var(--accent-purple); /* Cor de destaque roxa */
     filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
 }
 
-.form-section {
+.area-formulario {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.form-card {
-    background: rgba(255, 255, 255, 0.112); /* Efeito vidro translúcido Apple */
+.cartao-formulario {
+    background: rgba(35, 18, 58, 0.166);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.112);
+    border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: 30px;
     padding: 3rem;
     width: 100%;
@@ -66,110 +82,72 @@ body {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.form-card h2 {
+.cartao-formulario h2 {
     font-size: 2rem;
-    color: var(--text-heading);
+    color: var(--text-light);
     margin-bottom: 5px;
     font-weight: 600;
     text-align: center;
 }
 
-.subtitle {
+.texto-auxiliar {
     text-align: center;
-    color: var(--text-body);
+    color: rgba(255, 255, 255, 0.86);
     margin-bottom: 2rem;
     font-size: 0.95rem;
 }
 
-.subtitle a {
+.texto-auxiliar a {
     color: var(--accent-peach);
     font-weight: 700;
     text-decoration: underline;
 }
 
-.formulario-cadastro, .formulario-login {
+.formulario-cadastro,
+.formulario-login {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.input-group {
+.grupo-campo {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.input-group i:not(.toggle-password) {
+.grupo-campo i {
     position: absolute;
     left: 1rem;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.9rem;
 }
 
-.input-group input {
+.grupo-campo input {
     width: 100%;
     padding: 12px 15px 12px 40px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     font-size: 0.95rem;
-    color: var(--text-heading);
+    color: var(--text-light);
     outline: none;
     transition: all 0.3s ease;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.input-group input:focus {
+.grupo-campo input:focus {
     border-color: var(--accent-purple);
     box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.2);
 }
 
-.input-group input::placeholder {
-    color: var(--text-muted);
+.grupo-campo input::placeholder {
+    color: rgba(255, 255, 255, 0.72);
 }
 
-.toggle-password {
-    position: absolute;
-    right: 1rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.checkbox-group label {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 0.8rem;
-    color: var(--text-body);
-    cursor: pointer;
-}
-
-.checkbox-group input[type="checkbox"] {
-    accent-color: var(--accent-purple);
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-    margin-top: 2px;
-}
-
-.checkbox-group strong {
-    font-weight: 700;
-    text-decoration: underline;
-    color: var(--accent-peach);
-}
-
-.btn-signup {
+.botao-enviar {
     background-color: var(--accent-purple);
     color: var(--text-light);
     border: none;
@@ -182,105 +160,27 @@ body {
     margin-top: 10px;
 }
 
-.btn-signup:hover {
+.botao-enviar:hover {
     background-color: var(--accent-magenta);
 }
 
-.btn-signup:active {
+.botao-enviar:active {
     transform: scale(0.98);
 }
 
-.social-signup {
-    margin-top: 25px;
-    text-align: center;
-    position: relative;
-}
-
-.social-signup span {
-    background: transparent;
-    padding: 0 15px;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    position: relative;
-    z-index: 1;
-}
-
-.social-signup::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(26, 11, 46, 0.15);
-    z-index: 0;
-}
-
-.social-signup span {
-    background-color: #f5f0fa; /* Combina com o fundo do card para não cortar o texto */
-    padding: 0 10px;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.social-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.social-icon:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
-.facebook {
-    background-color: #1877F2;
-}
-
-.google {
-    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
-    background: white; /* simple google color below */
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.google i {
-    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-
-.linkedin {
-    background-color: #0A66C2;
-}
-
-/* Responsiveness */
 @media (max-width: 900px) {
-    .container {
+    .pagina-autenticacao {
         flex-direction: column;
         padding: 1rem;
     }
     
-    .brand-section {
+    .area-marca {
         justify-content: center;
+        align-items: center;
         padding: 2rem 0;
     }
     
-    .form-section {
+    .area-formulario {
         padding: 1rem;
     }
 }

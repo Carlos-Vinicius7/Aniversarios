@@ -3,97 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastre aniversários, acompanhe tudo no calendário e guarde ideias de presente em notas. Nunca mais esqueça uma data importante.">
+    <title>Agenda de Aniversários | Nunca mais esqueça uma data importante</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="./Frontend/src/CSS/Global/global.css">
-    <link rel="stylesheet" href="./Frontend/src/CSS/pages/Login/Login.css">
-    <title>Login e Cadastro</title>
+    <link rel="stylesheet" href="./Frontend/src/CSS/pages/Landing/Landing.css">
 </head>
 <body>
-    <div class="container">
-        <div class="brand-section">
-            <div class="logo">
-                <h1>Agenda de Aniversários</h1>
+
+    <!-- Navegação -->
+    <header class="cabecalho-site">
+        <div class="conteiner-pagina cabecalho-conteudo">
+            <a href="#inicio" class="marca-site">
+                <i class="fa-solid fa-cake-candles"></i>
+                <span>Agenda de Aniversários</span>
+            </a>
+
+            <nav class="navegacao" aria-label="Seções da página">
+                <a href="#recursos">Recursos</a>
+                <a href="#como-funciona">Como funciona</a>
+            </nav>
+
+            <div class="acoes-cabecalho">
+                <a href="./Frontend/src/Pages/Auth/login.html#entrar" class="botao botao-discreto">Entrar</a>
+                <a href="./Frontend/src/Pages/Auth/login.html#cadastro" class="botao botao-principal">Criar conta</a>
             </div>
         </div>
-        
-        <div class="form-section">
-            <div class="form-card">
-                
-                <!-- Formulário de Cadastro (Visível por padrão) -->
-                <div id="cadastro-container">
-                    <h2>Criar uma conta</h2>
-                    <p class="subtitle">Já tem uma conta? <a href="#" id="link-to-login">Entrar</a></p>
+    </header>
 
-                    <form class="formulario-cadastro">
-                        <div class="input-group">
-                            <i class="fa-regular fa-user"></i>
-                            <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <i class="fa-regular fa-envelope"></i>
-                            <input type="email" id="email-cadastro" name="email" placeholder="E-mail" required>
-                        </div>
-
-                        <div class="input-group">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="senha-cadastro" name="senha" placeholder="Senha" required>
-                        </div>
-
-                        <div class="input-group">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="confirmacao_senha" name="confirmacao_senha" placeholder="Confirmar senha" required>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <label>
-                                <input type="checkbox" name="terms" required>
-                                <span>Eu concordo com os <strong>Termos de Serviço</strong> e a <strong>Política de Privacidade</strong></span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn-signup">Cadastrar</button>
-                    </form>
+    <main>
+        <!-- Hero -->
+        <section class="destaque-inicial" id="inicio">
+            <div class="conteiner-pagina conteudo-destaque">
+                <div class="texto-destaque">
+                    <span class="etiqueta-destaque"><i class="fa-solid fa-gift"></i> Organize suas datas especiais</span>
+                    <h1>Nunca mais esqueça um <em>aniversário</em></h1>
+                    <p>
+                        Cadastre as pessoas importantes, acompanhe tudo no calendário e guarde
+                        ideias de presente em notas — tudo em um só lugar.
+                    </p>
+                    <div class="acoes-destaque">
+                        <a href="./Frontend/src/Pages/Auth/login.html#cadastro" class="botao botao-principal botao-grande">
+                            Criar conta <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="./Frontend/src/Pages/Auth/login.html#entrar" class="botao botao-contorno botao-grande">Já tenho conta</a>
+                    </div>
                 </div>
 
-                <!-- Formulário de Login (Oculto por padrão) -->
-                <div id="login-container" style="display: none;">
-                    <h2>Entrar</h2>
-                    <p class="subtitle">Não tem uma conta? <a href="#" id="link-to-cadastro">Criar conta</a></p>
-
-                    <form class="formulario-login">
-                        <div class="input-group">
-                            <i class="fa-regular fa-envelope"></i>
-                            <input type="email" id="email" name="email" placeholder="E-mail" required>
+                <!-- Prévia ilustrativa do sistema -->
+                <div class="visual-destaque" aria-hidden="true">
+                    <div class="cartao-previa">
+                        <div class="titulo-previa"><i class="fa-solid fa-cake-candles"></i> Próximos aniversários</div>
+                        <div class="linha-previa">
+                            <span class="avatar-previa">MS</span>
+                            <div><strong>Maria Silva</strong><small>28 anos</small></div>
+                            <span class="etiqueta-previa etiqueta-magenta">4 dias</span>
                         </div>
-
-                        <div class="input-group">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                        <div class="linha-previa">
+                            <span class="avatar-previa">JS</span>
+                            <div><strong>João Santos</strong><small>35 anos</small></div>
+                            <span class="etiqueta-previa etiqueta-roxa">11 dias</span>
                         </div>
-
-                        <div class="checkbox-group">
-                            <label>
-                                <input type="checkbox" name="remember">
-                                Lembrar de mim
-                            </label>
+                        <div class="linha-previa">
+                            <span class="avatar-previa">AO</span>
+                            <div><strong>Ana Oliveira</strong><small>42 anos</small></div>
+                            <span class="etiqueta-previa etiqueta-suave">20 dias</span>
                         </div>
-
-                        <button type="submit" class="btn-signup">Entrar</button>
-                    </form>
+                    </div>
+                    <div class="nota-previa">
+                        <i class="fa-solid fa-note-sticky"></i>
+                        <span>Comprar presente da Maria</span>
+                    </div>
                 </div>
-
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Script externo para alternar entre os formulários -->
-    <script src="./Frontend/src/JavaScript/pages/Login/login.js"></script>
+        <!-- Recursos -->
+        <section class="secao" id="recursos">
+            <div class="conteiner-pagina">
+                <div class="cabecalho-secao">
+                    <h2>Tudo que você precisa para lembrar das datas</h2>
+                    <p>Simples de usar, pensado para quem quer organização sem complicação.</p>
+                </div>
+
+                <div class="grade-recursos">
+                    <article class="cartao-recurso">
+                        <span class="icone-recurso"><i class="fa-solid fa-chart-pie"></i></span>
+                        <h3>Dashboard</h3>
+                        <p>Veja de relance quantos aniversários estão cadastrados e quem faz aniversário em breve.</p>
+                    </article>
+
+                    <article class="cartao-recurso">
+                        <span class="icone-recurso"><i class="fa-solid fa-calendar-days"></i></span>
+                        <h3>Calendário</h3>
+                        <p>Navegue mês a mês e visualize aniversários e notas direto nos dias certos.</p>
+                    </article>
+
+                    <article class="cartao-recurso">
+                        <span class="icone-recurso"><i class="fa-solid fa-cake-candles"></i></span>
+                        <h3>Aniversários</h3>
+                        <p>Cadastre pessoas por grupo — família, amigos, trabalho — e edite quando quiser.</p>
+                    </article>
+
+                    <article class="cartao-recurso">
+                        <span class="icone-recurso"><i class="fa-solid fa-note-sticky"></i></span>
+                        <h3>Notas</h3>
+                        <p>Anote ideias de presente e lembretes, escolhendo o dia em que cada nota deve aparecer.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Como funciona -->
+        <section class="secao secao-alternativa" id="como-funciona">
+            <div class="conteiner-pagina">
+                <div class="cabecalho-secao">
+                    <h2>Como funciona</h2>
+                    <p>Em três passos você já está com tudo organizado.</p>
+                </div>
+
+                <ol class="lista-etapas">
+                    <li>
+                        <span class="numero-etapa">1</span>
+                        <h3>Crie sua conta</h3>
+                        <p>Leva menos de um minuto para se cadastrar e entrar.</p>
+                    </li>
+                    <li>
+                        <span class="numero-etapa">2</span>
+                        <h3>Cadastre os aniversários</h3>
+                        <p>Adicione nome, data de nascimento e o grupo de cada pessoa.</p>
+                    </li>
+                    <li>
+                        <span class="numero-etapa">3</span>
+                        <h3>Acompanhe tudo</h3>
+                        <p>Consulte o dashboard e o calendário sempre que precisar.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Chamada final -->
+        <section class="chamada-final">
+            <div class="conteiner-pagina conteudo-chamada">
+                <h2>Pronto para organizar seus aniversários?</h2>
+                <p>Crie sua conta agora ou entre para continuar de onde parou.</p>
+                <div class="acoes-destaque acoes-chamada">
+                    <a href="./Frontend/src/Pages/Auth/login.html#cadastro" class="botao botao-claro botao-grande">Criar conta</a>
+                    <a href="./Frontend/src/Pages/Auth/login.html#entrar" class="botao botao-contorno botao-grande">Entrar</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="conteiner-pagina">
+            <span><i class="fa-solid fa-cake-candles"></i> Agenda de Aniversários</span>
+            <small>&copy; <span id="lp-ano">2026</span> — Todos os direitos reservados</small>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('lp-ano').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
