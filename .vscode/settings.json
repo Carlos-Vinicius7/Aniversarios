@@ -1,3 +1,20 @@
 {
-    "liveServer.settings.port": 5504
+    "liveServer.settings.port": 5504,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "banco008.vpshost12372.mysql.dbaas.com.br",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "banco008",
+            "username": "banco008",
+            "password": "Uninass@u199",
+            "name": "Banco"
+        }
+    ]
 }
