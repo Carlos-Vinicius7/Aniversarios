@@ -5,7 +5,6 @@
 </div>
 
 <div class="row g-4">
-    <!-- Card de Perfil -->
     <div class="col-lg-4">
         <div class="fragment-card text-center">
             <div class="mb-3 profile-avatar">
@@ -19,156 +18,67 @@
         </div>
     </div>
 
-    <!-- Card de Informações -->
     <div class="col-lg-8">
         <div class="fragment-card">
             <h5><i class="bi bi-pencil-square me-2 info-icon"></i>Informações da Conta</h5>
             <form class="mt-3" id="form-perfil">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label form-label-custom">Nome completo</label>
-                        <input type="text" id="perfil-nome" class="form-control form-control-custom" placeholder="Seu nome completo" required>
+                        <label for="perfil-nome" class="form-label form-label-custom">Nome completo</label>
+                        <input type="text" id="perfil-nome" class="form-control form-control-custom" placeholder="Seu nome completo" maxlength="200" required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label form-label-custom">E-mail</label>
-                        <input type="email" id="perfil-email" class="form-control form-control-custom" placeholder="seu@email.com" required>
+                        <label for="perfil-email" class="form-label form-label-custom">E-mail</label>
+                        <input type="email" id="perfil-email" class="form-control form-control-custom" placeholder="seu@email.com" maxlength="50" required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label form-label-custom">Telefone</label>
-                        <input type="tel" id="perfil-telefone" class="form-control form-control-custom" placeholder="(00) 00000-0000">
+                        <label for="perfil-telefone" class="form-label form-label-custom">Telefone</label>
+                        <input type="tel" id="perfil-telefone" class="form-control form-control-custom" placeholder="(00) 00000-0000" maxlength="20">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label form-label-custom">Data de nascimento</label>
+                        <label for="perfil-nascimento" class="form-label form-label-custom">Data de nascimento</label>
                         <input type="date" id="perfil-nascimento" class="form-control form-control-custom">
                     </div>
                 </div>
-                <button type="submit" class="btn mt-4 px-4 py-2 btn-save-changes">
+                <button type="submit" class="btn mt-4 px-4 py-2 btn-save-changes" id="btn-salvar-perfil">
                     <i class="bi bi-check-lg me-2"></i>Salvar Alterações
                 </button>
-                <span id="perfil-msg-salvo" class="ms-3 text-success" style="display: none; font-size: 0.9rem;">
+                <span id="perfil-msg-salvo" class="ms-3 text-success" role="status" hidden>
                     <i class="bi bi-check-circle me-1"></i>Salvo com sucesso!
                 </span>
+                <span id="perfil-msg-erro" class="ms-3 text-danger" role="alert" hidden></span>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Card de Preferências -->
 <div class="fragment-card mt-4">
     <h5><i class="bi bi-gear me-2 info-icon"></i>Preferências</h5>
     <div class="row g-3 mt-1">
         <div class="col-md-6">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="notifEmail">
-                <label class="form-check-label pref-label" for="notifEmail">
-                    Notificações por e-mail
-                </label>
+                <label class="form-check-label pref-label" for="notifEmail">Notificações por e-mail</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="notifPush">
-                <label class="form-check-label pref-label" for="notifPush">
-                    Notificações push
-                </label>
+                <label class="form-check-label pref-label" for="notifPush">Notificações push</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="lembrete3dias">
-                <label class="form-check-label pref-label" for="lembrete3dias">
-                    Lembrete 3 dias antes
-                </label>
+                <label class="form-check-label pref-label" for="lembrete3dias">Lembrete 3 dias antes</label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="lembreteNoDia">
-                <label class="form-check-label pref-label" for="lembreteNoDia">
-                    Lembrete no dia
-                </label>
+                <label class="form-check-label pref-label" for="lembreteNoDia">Lembrete no dia</label>
             </div>
         </div>
     </div>
+    <p class="text-danger mt-3 mb-0" id="preferencias-msg-erro" role="alert" hidden></p>
 </div>
-
-<script>
-(function() {
-    const PERFIL_KEY = 'perfil';
-    const PREFS_KEY = 'preferencias';
-
-    // Elementos do formulário
-    const form = document.getElementById('form-perfil');
-    const nomeInput = document.getElementById('perfil-nome');
-    const emailInput = document.getElementById('perfil-email');
-    const telefoneInput = document.getElementById('perfil-telefone');
-    const nascimentoInput = document.getElementById('perfil-nascimento');
-    const displayNome = document.getElementById('perfil-display-nome');
-    const displayEmail = document.getElementById('perfil-display-email');
-    const msgSalvo = document.getElementById('perfil-msg-salvo');
-
-    // Checkboxes de preferências
-    const notifEmail = document.getElementById('notifEmail');
-    const notifPush = document.getElementById('notifPush');
-    const lembrete3dias = document.getElementById('lembrete3dias');
-    const lembreteNoDia = document.getElementById('lembreteNoDia');
-
-    // Carregar perfil salvo
-    function carregarPerfil() {
-        const perfil = JSON.parse(localStorage.getItem(PERFIL_KEY) || '{}');
-        nomeInput.value = perfil.nome || '';
-        emailInput.value = perfil.email || '';
-        telefoneInput.value = perfil.telefone || '';
-        nascimentoInput.value = perfil.nascimento || '';
-
-        displayNome.textContent = perfil.nome || '—';
-        displayEmail.textContent = perfil.email || '—';
-    }
-
-    // Carregar preferências salvas
-    function carregarPreferencias() {
-        const prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || '{}');
-        notifEmail.checked = prefs.notifEmail !== undefined ? prefs.notifEmail : false;
-        notifPush.checked = prefs.notifPush !== undefined ? prefs.notifPush : false;
-        lembrete3dias.checked = prefs.lembrete3dias !== undefined ? prefs.lembrete3dias : false;
-        lembreteNoDia.checked = prefs.lembreteNoDia !== undefined ? prefs.lembreteNoDia : false;
-    }
-
-    // Salvar preferências ao clicar
-    function salvarPreferencias() {
-        const prefs = {
-            notifEmail: notifEmail.checked,
-            notifPush: notifPush.checked,
-            lembrete3dias: lembrete3dias.checked,
-            lembreteNoDia: lembreteNoDia.checked
-        };
-        localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-    }
-
-    [notifEmail, notifPush, lembrete3dias, lembreteNoDia].forEach(cb => {
-        cb.addEventListener('change', salvarPreferencias);
-    });
-
-    // Salvar perfil
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const perfil = {
-            nome: nomeInput.value.trim(),
-            email: emailInput.value.trim(),
-            telefone: telefoneInput.value.trim(),
-            nascimento: nascimentoInput.value
-        };
-        localStorage.setItem(PERFIL_KEY, JSON.stringify(perfil));
-
-        displayNome.textContent = perfil.nome || '—';
-        displayEmail.textContent = perfil.email || '—';
-
-        // Feedback visual
-        msgSalvo.style.display = 'inline';
-        setTimeout(() => { msgSalvo.style.display = 'none'; }, 3000);
-    });
-
-    carregarPerfil();
-    carregarPreferencias();
-})();
-</script>

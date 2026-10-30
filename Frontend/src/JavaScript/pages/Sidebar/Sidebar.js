@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('sidebar-overlay');
     const contentArea = document.getElementById('content-area');
     const navLinks = document.querySelectorAll('.sidebar-nav .nav-link[data-fragment]');
+    const linkSair = document.getElementById('btn-sair');
 
     // ==============================
     // TOGGLE SIDEBAR (Desktop)
@@ -43,6 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.addEventListener('click', () => {
             sidebar.classList.remove('mobile-open');
             overlay.classList.remove('show');
+        });
+    }
+
+    if (linkSair) {
+        linkSair.addEventListener('click', async event => {
+            event.preventDefault();
+            try {
+                await AppData.sair();
+                window.location.replace('../Auth/login.html#entrar');
+            } catch (error) {
+                alert(error.message);
+            }
         });
     }
 
@@ -182,5 +195,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadDefaultFragment();
+    async function iniciarAplicacao() {
+        try {
+            await AppData.consultarSessao();
+            await AppData.carregarDados();
+        } catch (error) {
+            if (error.statusCode === 401) {
+                window.location.replace('../../Auth/login.html#entrar');
+                return;
+            }
+            console.error('Não foi possível iniciar a aplicação:', error);
+            contentArea.innerHTML = `
+                <div class="fragment-card" role="alert" style="text-align: center; padding: 60px 24px;">
+                    <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545; margin-bottom: 16px; display: block;"></i>
+                    <h5>Não foi possível conectar ao banco de dados</h5>
+                    <p style="color: #6c757d;">${error.message}</p>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="location.reload()">Tentar novamente</button>
+                </div>
+            `;
+            return;
+        }
+        loadDefaultFragment();
+    }
+
+    iniciarAplicacao();
 });

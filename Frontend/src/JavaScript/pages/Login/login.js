@@ -39,16 +39,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const formCadastro = document.querySelector('.formulario-cadastro');
 
     if (formLogin) {
-        formLogin.addEventListener('submit', function(e) {
+        formLogin.addEventListener('submit', async function(e) {
             e.preventDefault();
-            window.location.href = '../App/app.html';
+            const erro = document.getElementById('login-error');
+            const botao = formLogin.querySelector('button[type="submit"]');
+            erro.hidden = true;
+            botao.disabled = true;
+            try {
+                const dados = new FormData(formLogin);
+                await AppData.entrar(dados.get('email'), dados.get('senha'));
+                window.location.replace('../App/app.html');
+            } catch (error) {
+                erro.textContent = error.message;
+                erro.hidden = false;
+            } finally {
+                botao.disabled = false;
+            }
         });
     }
 
     if (formCadastro) {
-        formCadastro.addEventListener('submit', function(e) {
+        formCadastro.addEventListener('submit', async function(e) {
             e.preventDefault();
-            window.location.href = '../App/app.html';
+            const erro = document.getElementById('cadastro-error');
+            const botao = formCadastro.querySelector('button[type="submit"]');
+            erro.hidden = true;
+            botao.disabled = true;
+            try {
+                const dados = new FormData(formCadastro);
+                await AppData.registrar(
+                    dados.get('nome'),
+                    dados.get('email'),
+                    dados.get('senha')
+                );
+                window.location.replace('../App/app.html');
+            } catch (error) {
+                erro.textContent = error.message;
+                erro.hidden = false;
+            } finally {
+                botao.disabled = false;
+            }
         });
     }
 });

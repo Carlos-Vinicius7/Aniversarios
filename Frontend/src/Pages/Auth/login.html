@@ -31,7 +31,7 @@
                     <form class="formulario-login">
                         <label class="grupo-campo">
                             <i class="bi bi-envelope"></i>
-                            <input type="email" name="email" placeholder="Seu e-mail" autocomplete="email" required>
+                            <input type="email" name="email" placeholder="Seu e-mail" autocomplete="email" maxlength="50" required>
                         </label>
                         <label class="grupo-campo">
                             <i class="bi bi-lock"></i>
@@ -39,6 +39,7 @@
                         </label>
                         <button class="botao-enviar" type="submit">Entrar</button>
                     </form>
+                    <p class="texto-auxiliar" id="login-error" role="alert" hidden></p>
                     <p class="texto-auxiliar">Ainda não tem uma conta? <a href="#cadastro" id="link-to-cadastro">Cadastre-se</a></p>
                 </div>
 
@@ -52,7 +53,7 @@
                         </label>
                         <label class="grupo-campo">
                             <i class="bi bi-envelope"></i>
-                            <input type="email" name="email" placeholder="Seu e-mail" autocomplete="email" required>
+                            <input type="email" name="email" placeholder="Seu e-mail" autocomplete="email" maxlength="50" required>
                         </label>
                         <label class="grupo-campo">
                             <i class="bi bi-lock"></i>
@@ -60,12 +61,14 @@
                         </label>
                         <button class="botao-enviar" type="submit">Criar conta</button>
                     </form>
+                    <p class="texto-auxiliar" id="cadastro-error" role="alert" hidden></p>
                     <p class="texto-auxiliar">Já tem uma conta? <a href="#entrar" id="link-to-login">Entrar</a></p>
                 </div>
             </div>
         </section>
     </main>
 
+    <script src="../../JavaScript/AppData.js"></script>
     <script src="../../JavaScript/pages/Login/login.js"></script>
 </body>
 </html>

@@ -1,21 +1,121 @@
 /**
- * AppData.js
- * Módulo central de dados — persiste aniversários e notas no localStorage.
- * Todas as páginas (Dashboard, Calendário, Aniversários, Notas) consomem este módulo.
+ * Central data module. Persistent application data is always loaded from the PHP API.
  */
-
 const AppData = (() => {
-    const ANIVERSARIOS_KEY = 'aniversarios';
-    const NOTAS_KEY = 'notas';
-    const ATIVIDADES_KEY = 'atividades';
-
-    // ========================
-    // HELPERS
-    // ========================
+    const API_URL = new URL('../../../../Backend/src/index.php', document.baseURI);
     const MESES = [
         'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
         'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
     ];
+
+    let aniversarios = [];
+    let notas = [];
+    let atividades = [];
+    let usuario = null;
+    let preferencias = {
+        notificacao_email: false,
+        notificacao_push: false,
+        lembrete_3_dias: false,
+        lembrete_no_dia: false
+    };
+
+    async function requisitar(rota, metodo = 'GET', dados = null) {
+        const url = new URL(API_URL);
+        url.searchParams.set('rota', rota);
+        const opcoes = {
+            method: metodo,
+            credentials: 'same-origin',
+            headers: { Accept: 'application/json' }
+        };
+        if (dados !== null) {
+            opcoes.headers['Content-Type'] = 'application/json';
+            opcoes.body = JSON.stringify(dados);
+        }
+
+        let resposta;
+        try {
+            resposta = await fetch(url, opcoes);
+        } catch {
+            throw new Error('Não foi possível conectar ao servidor. Verifique a conexão e tente novamente.');
+        }
+
+        let resultado;
+        try {
+            resultado = await resposta.json();
+        } catch {
+            throw new Error('O servidor retornou uma resposta inválida.');
+        }
+        if (!resposta.ok) {
+            const erro = new Error(resultado.erro || 'Não foi possível concluir a operação.');
+            erro.statusCode = resposta.status;
+            throw erro;
+        }
+        return resultado;
+    }
+
+    function entrar(email, senha) {
+        return requisitar('auth.entrar', 'POST', { email, senha });
+    }
+
+    function registrar(nome, email, senha) {
+        return requisitar('auth.registrar', 'POST', { nome, email, senha });
+    }
+
+    function sair() {
+        return requisitar('auth.sair', 'POST');
+    }
+
+    function normalizarAniversario(item) {
+        return {
+            id: String(item.id),
+            nome: item.nome,
+            dataNascimento: item.dataNascimento || item.nascimento,
+            grupo: item.grupo
+        };
+    }
+
+    function normalizarNota(item) {
+        return {
+            id: String(item.id),
+            titulo: item.titulo,
+            conteudo: item.conteudo,
+            data: item.data
+        };
+    }
+
+    async function consultarSessao() {
+        return requisitar('auth.sessao');
+    }
+
+    async function carregarDados() {
+        const dados = await requisitar('app.dados');
+        aniversarios = dados.aniversarios.map(normalizarAniversario);
+        notas = dados.notas.map(normalizarNota);
+        atividades = dados.atividades;
+        usuario = dados.usuario;
+        preferencias = dados.preferencias;
+        return dados.usuario;
+    }
+
+    function getUsuario() {
+        return usuario;
+    }
+
+    async function atualizarPerfil(dados) {
+        const resultado = await requisitar('conta.perfil', 'PUT', dados);
+        usuario = resultado.usuario;
+        return usuario;
+    }
+
+    function getPreferencias() {
+        return preferencias;
+    }
+
+    async function atualizarPreferencias(dados) {
+        const resultado = await requisitar('conta.preferencias', 'PUT', dados);
+        preferencias = resultado.preferencias;
+        return preferencias;
+    }
 
     function parseDataNascimento(dataISO) {
         const [ano, mes, dia] = dataISO.split('-').map(Number);
@@ -26,8 +126,8 @@ const AppData = (() => {
         const hoje = new Date();
         const nasc = parseDataNascimento(dataNascimento);
         let idade = hoje.getFullYear() - nasc.getFullYear();
-        const m = hoje.getMonth() - nasc.getMonth();
-        if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) {
+        if (hoje.getMonth() < nasc.getMonth()
+            || (hoje.getMonth() === nasc.getMonth() && hoje.getDate() < nasc.getDate())) {
             idade--;
         }
         return idade;
@@ -41,27 +141,22 @@ const AppData = (() => {
         if (proximo < hoje) {
             proximo = new Date(hoje.getFullYear() + 1, nasc.getMonth(), nasc.getDate());
         }
-        const diff = proximo - hoje;
-        return Math.ceil(diff / (1000 * 60 * 60 * 24));
+        return Math.ceil((proximo - hoje) / (1000 * 60 * 60 * 24));
     }
 
     function formatarDataBR(dataISO) {
-        const partes = dataISO.split('-');
-        return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        const [ano, mes, dia] = dataISO.split('-');
+        return `${dia}/${mes}/${ano}`;
     }
 
     function formatarDataExtenso(dataISO) {
-        const partes = dataISO.split('-');
-        const dia = parseInt(partes[2], 10);
-        const mes = parseInt(partes[1], 10) - 1;
-        return `${String(dia).padStart(2, '0')} de ${MESES[mes]}`;
+        const [ano, mes, dia] = dataISO.split('-');
+        return `${String(Number(dia)).padStart(2, '0')} de ${MESES[Number(mes) - 1]}`;
     }
 
     function tempoAtras(dataISO) {
-        const agora = new Date();
-        const data = new Date(dataISO);
-        const diffMs = agora - data;
-        const diffMin = Math.floor(diffMs / 60000);
+        const instante = dataISO.includes(' ') ? dataISO.replace(' ', 'T') : dataISO;
+        const diffMin = Math.floor((Date.now() - new Date(instante).getTime()) / 60000);
         if (diffMin < 1) return 'Agora mesmo';
         if (diffMin < 60) return `Há ${diffMin} min`;
         const diffH = Math.floor(diffMin / 60);
@@ -71,195 +166,115 @@ const AppData = (() => {
         return `Há ${diffD} dias`;
     }
 
-    // ========================
-    // ANIVERSÁRIOS
-    // ========================
     function getAniversarios() {
-        return JSON.parse(localStorage.getItem(ANIVERSARIOS_KEY) || '[]');
+        return aniversarios;
     }
 
-    function salvarAniversarios(lista) {
-        localStorage.setItem(ANIVERSARIOS_KEY, JSON.stringify(lista));
+    async function adicionarAniversario(dados) {
+        const resultado = await requisitar('aniversarios.criar', 'POST', dados);
+        const aniversario = normalizarAniversario(resultado.aniversario);
+        aniversarios.push(aniversario);
+        return aniversario;
     }
 
-    function adicionarAniversario(dados) {
-        const lista = getAniversarios();
-        const novo = {
-            id: Date.now().toString(),
-            nome: dados.nome,
-            dataNascimento: dados.dataNascimento,
-            grupo: dados.grupo || 'Geral',
-            criadoEm: new Date().toISOString()
-        };
-        lista.push(novo);
-        salvarAniversarios(lista);
-        adicionarAtividade(`Novo aniversário adicionado: <strong>${dados.nome}</strong>`);
-        return novo;
+    async function atualizarAniversario(id, dados) {
+        const resultado = await requisitar('aniversarios.editar', 'PUT', { ...dados, id });
+        const atualizado = normalizarAniversario(resultado.aniversario);
+        aniversarios = aniversarios.map(item => item.id === String(id) ? atualizado : item);
+        return atualizado;
     }
 
-    function atualizarAniversario(id, dados) {
-        const lista = getAniversarios();
-        const indice = lista.findIndex(aniversario => aniversario.id === id);
-        if (indice < 0) return null;
-
-        lista[indice] = {
-            ...lista[indice],
-            nome: dados.nome,
-            dataNascimento: dados.dataNascimento,
-            grupo: dados.grupo || 'Geral'
-        };
-        salvarAniversarios(lista);
-        adicionarAtividade(`Aniversário atualizado: <strong>${dados.nome}</strong>`);
-        return lista[indice];
-    }
-
-    function removerAniversario(id) {
-        let lista = getAniversarios();
-        const removido = lista.find(a => a.id === id);
-        lista = lista.filter(a => a.id !== id);
-        salvarAniversarios(lista);
-        if (removido) {
-            adicionarAtividade(`Aniversário removido: <strong>${removido.nome}</strong>`);
-        }
+    async function removerAniversario(id) {
+        await requisitar('aniversarios.excluir', 'DELETE', { id });
+        aniversarios = aniversarios.filter(item => item.id !== String(id));
     }
 
     function getProximosAniversarios(limite) {
-        const lista = getAniversarios();
-        const comDias = lista.map(a => ({
-            ...a,
-            diasRestantes: calcularDiasRestantes(a.dataNascimento),
-            idade: calcularIdade(a.dataNascimento)
-        }));
-        comDias.sort((a, b) => a.diasRestantes - b.diasRestantes);
-        return limite ? comDias.slice(0, limite) : comDias;
+        const lista = aniversarios.map(item => ({
+            ...item,
+            diasRestantes: calcularDiasRestantes(item.dataNascimento),
+            idade: calcularIdade(item.dataNascimento)
+        })).sort((a, b) => a.diasRestantes - b.diasRestantes);
+        return limite ? lista.slice(0, limite) : lista;
     }
 
-    function getAniversariosDoMes(mes, ano) {
-        const lista = getAniversarios();
-        return lista.filter(a => {
-            const d = parseDataNascimento(a.dataNascimento);
-            return d.getMonth() === mes;
-        }).map(a => ({
-            ...a,
-            idade: calcularIdade(a.dataNascimento),
-            dia: parseDataNascimento(a.dataNascimento).getDate()
-        })).sort((a, b) => a.dia - b.dia);
+    function getAniversariosDoMes(mes) {
+        return aniversarios.filter(item => parseDataNascimento(item.dataNascimento).getMonth() === mes)
+            .map(item => ({
+                ...item,
+                idade: calcularIdade(item.dataNascimento),
+                dia: parseDataNascimento(item.dataNascimento).getDate()
+            }))
+            .sort((a, b) => a.dia - b.dia);
     }
 
     function getAniversariosPorMesResumo() {
-        const lista = getAniversarios();
         const resumo = new Array(12).fill(0);
-        lista.forEach(a => {
-            const mes = parseDataNascimento(a.dataNascimento).getMonth();
-            resumo[mes]++;
-        });
+        aniversarios.forEach(item => resumo[parseDataNascimento(item.dataNascimento).getMonth()]++);
         return resumo;
     }
 
     function getEstatisticas() {
-        const lista = getAniversarios();
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
         const fimSemana = new Date(hoje);
         fimSemana.setDate(fimSemana.getDate() + 7);
-
-        let estaSemana = 0;
-        lista.forEach(a => {
-            const nasc = parseDataNascimento(a.dataNascimento);
-            let prox = new Date(hoje.getFullYear(), nasc.getMonth(), nasc.getDate());
-            if (prox < hoje) prox.setFullYear(prox.getFullYear() + 1);
-            if (prox >= hoje && prox <= fimSemana) estaSemana++;
-        });
-
-        const grupos = new Set(lista.map(a => a.grupo));
+        const estaSemana = aniversarios.filter(item => {
+            const nascimento = parseDataNascimento(item.dataNascimento);
+            let proximo = new Date(hoje.getFullYear(), nascimento.getMonth(), nascimento.getDate());
+            if (proximo < hoje) proximo.setFullYear(proximo.getFullYear() + 1);
+            return proximo >= hoje && proximo <= fimSemana;
+        }).length;
 
         return {
-            total: lista.length,
-            estaSemana: estaSemana,
-            notas: getNotas().length,
-            grupos: grupos.size
+            total: aniversarios.length,
+            estaSemana,
+            notas: notas.length,
+            grupos: new Set(aniversarios.map(item => item.grupo)).size
         };
     }
 
-    // ========================
-    // NOTAS
-    // ========================
     function getNotas() {
-        return JSON.parse(localStorage.getItem(NOTAS_KEY) || '[]');
+        return notas;
     }
 
-    function salvarNotas(lista) {
-        localStorage.setItem(NOTAS_KEY, JSON.stringify(lista));
+    async function adicionarNota(dados) {
+        const resultado = await requisitar('notas.criar', 'POST', dados);
+        const nota = normalizarNota(resultado.nota);
+        notas.unshift(nota);
+        return nota;
     }
 
-    function adicionarNota(dados) {
-        const lista = getNotas();
-        const nova = {
-            id: Date.now().toString(),
-            titulo: dados.titulo,
-            conteudo: dados.conteudo,
-            data: dados.data,
-            criadoEm: new Date().toISOString()
-        };
-        lista.unshift(nova);
-        salvarNotas(lista);
-        adicionarAtividade(`Nova nota criada: <strong>${dados.titulo}</strong>`);
-        return nova;
-    }
-
-    function atualizarNota(id, dados) {
-        const lista = getNotas();
-        const indice = lista.findIndex(nota => nota.id === id);
-        if (indice < 0) return null;
-
-        lista[indice] = {
-            ...lista[indice],
-            titulo: dados.titulo,
-            conteudo: dados.conteudo,
-            data: dados.data,
-            atualizadoEm: new Date().toISOString()
-        };
-        salvarNotas(lista);
-        adicionarAtividade(`Nota atualizada: <strong>${dados.titulo}</strong>`);
-        return lista[indice];
+    async function atualizarNota(id, dados) {
+        const resultado = await requisitar('notas.editar', 'PUT', { ...dados, id });
+        const atualizada = normalizarNota(resultado.nota);
+        notas = notas.map(item => item.id === String(id) ? atualizada : item);
+        return atualizada;
     }
 
     function getNotasDoDia(dataISO) {
-        return getNotas().filter(nota => nota.data === dataISO);
+        return notas.filter(nota => nota.data === dataISO);
     }
 
-    function removerNota(id) {
-        let lista = getNotas();
-        const removida = lista.find(n => n.id === id);
-        lista = lista.filter(n => n.id !== id);
-        salvarNotas(lista);
-        if (removida) {
-            adicionarAtividade(`Nota removida: <strong>${removida.titulo}</strong>`);
-        }
+    async function removerNota(id) {
+        await requisitar('notas.excluir', 'DELETE', { id });
+        notas = notas.filter(item => item.id !== String(id));
     }
 
-    // ========================
-    // ATIVIDADES RECENTES
-    // ========================
     function getAtividades() {
-        return JSON.parse(localStorage.getItem(ATIVIDADES_KEY) || '[]');
+        return atividades;
     }
 
-    function adicionarAtividade(descricao) {
-        const lista = getAtividades();
-        lista.unshift({
-            descricao: descricao,
-            data: new Date().toISOString()
-        });
-        // Manter apenas as últimas 20
-        if (lista.length > 20) lista.length = 20;
-        localStorage.setItem(ATIVIDADES_KEY, JSON.stringify(lista));
-    }
-
-    // ========================
-    // API PÚBLICA
-    // ========================
     return {
+        entrar,
+        registrar,
+        sair,
+        consultarSessao,
+        carregarDados,
+        getUsuario,
+        atualizarPerfil,
+        getPreferencias,
+        atualizarPreferencias,
         // Aniversários
         getAniversarios,
         adicionarAniversario,

@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarAvatarPreview();
     }
 
-    document.addEventListener('click', event => {
+    document.addEventListener('click', async event => {
         const editar = event.target.closest('.btn-editar-aniv');
         if (editar) {
             const aniversario = AppData.getAniversarios().find(item => item.id === editar.dataset.id);
@@ -120,8 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const remover = event.target.closest('.btn-remover-aniv');
         if (remover && confirm('Deseja remover este aniversário?')) {
-            AppData.removerAniversario(remover.dataset.id);
-            renderizarAniversarios();
+            try {
+                await AppData.removerAniversario(remover.dataset.id);
+                renderizarAniversarios();
+            } catch (error) {
+                alert(error.message);
+            }
         }
     });
 
@@ -135,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.id === 'modal-aniversario') limparFormularioAniversario();
     });
 
-    document.addEventListener('submit', event => {
+    document.addEventListener('submit', async event => {
         if (event.target.id !== 'form-novo-aniversario') return;
         event.preventDefault();
 
@@ -145,12 +149,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!nome || !dataNascimento) return;
 
         const id = document.getElementById('aniv-id').value;
-        if (id) {
-            AppData.atualizarAniversario(id, { nome, dataNascimento, grupo });
-        } else {
-            AppData.adicionarAniversario({ nome, dataNascimento, grupo });
+        const botao = document.getElementById('btn-salvar-aniversario');
+        botao.disabled = true;
+        try {
+            if (id) {
+                await AppData.atualizarAniversario(id, { nome, dataNascimento, grupo });
+            } else {
+                await AppData.adicionarAniversario({ nome, dataNascimento, grupo });
+            }
+            fecharModalAniversario();
+            renderizarAniversarios();
+        } catch (error) {
+            alert(error.message);
+        } finally {
+            botao.disabled = false;
         }
-        fecharModalAniversario();
-        renderizarAniversarios();
     });
 });

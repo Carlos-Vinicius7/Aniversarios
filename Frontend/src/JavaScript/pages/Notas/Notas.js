@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('btn-cancelar-edicao-nota').classList.add('d-none');
     }
 
-    document.addEventListener('click', event => {
+    document.addEventListener('click', async event => {
         const editar = event.target.closest('.btn-editar-nota');
         if (editar) {
             const nota = AppData.getNotas().find(item => item.id === editar.dataset.id);
@@ -95,13 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const remover = event.target.closest('.btn-remover-nota');
         if (remover && confirm('Deseja excluir esta nota?')) {
-            AppData.removerNota(remover.dataset.id);
-            if (document.getElementById('nota-id').value === remover.dataset.id) limparEditorNota();
-            renderNotas();
+            try {
+                await AppData.removerNota(remover.dataset.id);
+                if (document.getElementById('nota-id').value === remover.dataset.id) limparEditorNota();
+                renderNotas();
+            } catch (error) {
+                alert(error.message);
+            }
         }
     });
 
-    document.addEventListener('submit', event => {
+    document.addEventListener('submit', async event => {
         if (event.target.id !== 'form-nova-nota') return;
         event.preventDefault();
 
@@ -111,12 +115,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!titulo || !conteudo || !data) return;
 
         const id = document.getElementById('nota-id').value;
-        if (id) {
-            AppData.atualizarNota(id, { titulo, conteudo, data });
-        } else {
-            AppData.adicionarNota({ titulo, conteudo, data });
+        const botao = document.getElementById('btn-salvar-nota');
+        botao.disabled = true;
+        try {
+            if (id) {
+                await AppData.atualizarNota(id, { titulo, conteudo, data });
+            } else {
+                await AppData.adicionarNota({ titulo, conteudo, data });
+            }
+            limparEditorNota();
+            renderNotas();
+        } catch (error) {
+            alert(error.message);
+        } finally {
+            botao.disabled = false;
         }
-        limparEditorNota();
-        renderNotas();
     });
 });
